@@ -1,0 +1,63 @@
+# .cgao.yml example — copy to .cgao.yml and adjust.
+# Per docs/cgao_spec_v3.md §18.
+
+schema_version: 1
+
+repo:
+  name: cgao
+  default_branch: main
+
+gates:
+  spec_sha: true
+  plan_sha: true
+  approval_sha: true
+  head_sha: true
+  base_sha: true
+
+runners:
+  trusted_control:
+    label: cgao-trusted-runner
+    allowed_secrets:
+      - CGAO_CONTROL_TOKEN
+      - GITHUB_APP_KEY
+      - GITHUB_APP_ID
+      - LARK_APP_SECRET
+      - WECOM_CORP_ID
+      - WECOM_AGENT_SECRET
+      - WECOM_TOKEN
+      - WECOM_ENCODING_AES_KEY
+  untrusted_code:
+    label: cgao-untrusted-runner
+    allowed_secrets: []
+
+intake:
+  enabled: false
+  mode: confirm
+  sources:
+    lark:
+      enabled: false
+      app_id: ""
+      triggers:
+        at_bot_only: false
+        explicit_keywords: ["建issue", "提需求", "记录", "bug", "需求"]
+      llm:
+        confidence_threshold: 0.75
+        max_clarify_rounds: 5
+    wecom:
+      enabled: false
+      corp_id: ""
+      triggers:
+        at_bot_only: false
+        explicit_keywords: ["建issue", "提需求", "记录", "bug", "需求"]
+      llm:
+        confidence_threshold: 0.75
+        max_clarify_rounds: 5
+  dedup:
+    window_minutes: 1440
+    key: ["source_type", "external_id", "content_hash"]
+  rate_limit:
+    max_llm_calls_per_repo_per_hour: 60
+  security:
+    redact_before_llm: true
+    untrusted_envelope: true
+    reject_external_links: true
