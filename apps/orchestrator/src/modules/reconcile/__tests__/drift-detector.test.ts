@@ -4,7 +4,7 @@
 
 import { InMemoryEventBus } from '@cgao/eventbus';
 import { describe, expect, it } from 'vitest';
-import { DriftDetector, type DbProjection } from '../drift-detector.js';
+import { type DbProjection, DriftDetector } from '../drift-detector.js';
 import type { DriftReport } from '../github-hydrator.js';
 
 function baseProjection(overrides: Partial<DbProjection> = {}): DbProjection {

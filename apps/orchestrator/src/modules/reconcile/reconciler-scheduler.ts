@@ -13,7 +13,7 @@
  */
 
 import type { EventBus } from '@cgao/eventbus';
-import { DriftDetector, type DbProjection } from './drift-detector.js';
+import { type DbProjection, DriftDetector } from './drift-detector.js';
 import { type DriftReport, GitHubHydrator } from './github-hydrator.js';
 
 /** Workflow states considered "in-flight" for reconciliation. */

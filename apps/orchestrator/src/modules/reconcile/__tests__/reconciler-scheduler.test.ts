@@ -4,20 +4,19 @@
 
 import { InMemoryEventBus } from '@cgao/eventbus';
 import { describe, expect, it } from 'vitest';
-import { DriftDetector, type DbProjection } from '../drift-detector.js';
+import { type DbProjection, DriftDetector } from '../drift-detector.js';
+import {
+  GitHubHydrator,
+  type LiveIssueSnapshot,
+  type LivePrSnapshot,
+  type TrustedGithubHydrationPort,
+} from '../github-hydrator.js';
 import {
   type InflightRun,
   type InflightRunReader,
   type ProjectionProvider,
   ReconcilerScheduler,
 } from '../reconciler-scheduler.js';
-import {
-  type DriftReport,
-  GitHubHydrator,
-  type LiveIssueSnapshot,
-  type LivePrSnapshot,
-  type TrustedGithubHydrationPort,
-} from '../github-hydrator.js';
 
 class FakeReader implements InflightRunReader {
   constructor(private readonly runs: InflightRun[]) {}
@@ -209,6 +208,3 @@ describe('T-M10-001 ReconcilerScheduler', () => {
     sched.stop();
   });
 });
-
-// re-export for type narrowing in tests
-export type { DriftReport };

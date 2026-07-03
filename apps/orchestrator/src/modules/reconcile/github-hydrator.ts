@@ -28,7 +28,11 @@ export interface LivePrSnapshot {
   baseSha: string;
   state: 'open' | 'closed' | 'merged';
   /** Latest check run conclusions for the head sha (.Rollup). */
-  checks: ReadonlyArray<{ name: string; status: 'completed' | 'in_progress' | 'queued'; conclusion: string | null }>;
+  checks: ReadonlyArray<{
+    name: string;
+    status: 'completed' | 'in_progress' | 'queued';
+    conclusion: string | null;
+  }>;
   /** Review decisions currently recorded on the PR. */
   reviews: ReadonlyArray<{ author: string; state: string }>;
 }
