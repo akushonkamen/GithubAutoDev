@@ -1,0 +1,104 @@
+name: cgao-claude-runner
+
+# T-M5-002 — Claude Code Action baseline. Accepts repository_dispatch
+# with client_payload.command ∈ {analyst, planner, executor, reviewer}.
+# Checks out the repo, installs pnpm, downloads the prompt artifact
+# from the local ArtifactStore stub, and runs claude-code-action with
+# the prompt. Spec §13 / §17.
+
+on:
+  repository_dispatch:
+    types: [analyst, planner, executor, reviewer]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cgao-runner-${{ github.event.client_payload.run_id || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  run:
+    name: ${{ github.event.action }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CGAO_RUN_ID: ${{ github.event.client_payload.run_id }}
+      CGAO_TASK_ID: ${{ github.event.client_payload.task_id }}
+      CGAO_PROMPT_URI: ${{ github.event.client_payload.prompt_uri }}
+      CGAO_PROFILE: ${{ github.event.client_payload.profile }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.base_sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.10.0'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download prompt artifact (stub)
+        run: |
+          set -euo pipefail
+          mkdir -p cgao-artifacts/handoff
+          # Stub fetcher: in production this pulls from the ArtifactStore
+          # (S3 / MinIO) keyed by sha. For local / CI sanity we accept
+          # an inline base64 prompt or a pre-populated file.
+          PROMPT_URI="${CGAO_PROMPT_URI}"
+          SHA="${PROMPT_URI#artifact://handoff/}"
+          SHA="${SHA#sha256:}"
+          OUT="cgao-artifacts/handoff/${SHA}"
+          if [ -n "${{ github.event.client_payload.prompt_b64 }}" ]; then
+            printf '%s' "${{ github.event.client_payload.prompt_b64 }}" | base64 -d > "$OUT"
+          elif [ ! -f "$OUT" ]; then
+            echo "prompt artifact missing: $OUT" >&2
+            exit 1
+          fi
+          echo "resolved prompt: $OUT"
+
+      - name: Resolve prompt path (broker shim)
+        run: |
+          node --input-type=module -e '
+            import { PromptLoader } from "./apps/runner-broker/src/cca/prompt-loader.js";
+            const loader = new PromptLoader(process.cwd());
+            const r = await loader.resolve(process.env.CGAO_PROMPT_URI);
+            console.log(`prompt_path=${r.path}`);
+            console.log(`prompt_kind=${r.kind}`);
+          '
+
+      - name: Run Claude Code Action
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CGAO_ARTIFACT_WRITE_TOKEN: ${{ secrets.CGAO_ARTIFACT_WRITE_TOKEN }}
+        run: |
+          pnpm dlx claude-code-action@latest \
+            --prompt-file "$(node --input-type=module -e '
+              import { PromptLoader } from "./apps/runner-broker/src/cca/prompt-loader.js";
+              const r = await new PromptLoader(process.cwd()).resolve(process.env.CGAO_PROMPT_URI);
+              process.stdout.write(r.path);
+            ')" \
+            --output-format json \
+            --output-file cgao-artifacts/worker_result/${CGAO_RUN_ID}.json || EXIT=$?
+          # The runner emits its result to the artifact store; failures
+          # are surfaced to the orchestrator via the runner-broker poll.
+          exit ${EXIT:-0}
+
+      - name: Upload worker_result artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgao-worker-result-${{ github.event.action }}-${{ github.run_id }}
+          path: cgao-artifacts/worker_result/
+          if-no-files-found: ignore
+          retention-days: 14
