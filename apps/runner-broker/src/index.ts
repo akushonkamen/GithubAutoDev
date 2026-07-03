@@ -135,3 +135,22 @@ export type {
   TestFixLoopState,
   WrapUntrustedFn,
 } from './gate/test-fix-loop.js';
+
+// T-M6-005 verifier baseline
+export {
+  acceptanceCriterionEvidenceSchema,
+  acceptanceEvidenceKindSchema,
+} from './gate/acceptance-evidence.js';
+export type {
+  AcceptanceCriterion,
+  AcceptanceCriterionEvidence,
+  AcceptanceEvidenceKind,
+} from './gate/acceptance-evidence.js';
+export { VerifierRunner } from './gate/verifier-runner.js';
+export type {
+  VerifierEvidenceSources,
+  VerifierGateSnapshot,
+  VerifierReviewSnapshot,
+  VerifierRunInput,
+  VerifierRunResult,
+} from './gate/verifier-runner.js';
