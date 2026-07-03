@@ -65,3 +65,19 @@ export const FORBIDDEN_SECRET_PATTERNS = [
   /-----BEGIN (?:RSA |EC |)PRIVATE KEY-----/u,
   /AKIA[0-9A-Z]{16}/u, // AWS access key id (defensive)
 ] as const;
+
+/**
+ * File names of the malicious-issue corpus under
+ * tests/fixtures/malicious-issues/. Tests load each file via fs +
+ * import.meta.url so the corpus can be edited without code changes.
+ *
+ * Each file maps to an attack scenario documented in
+ * attack-scenarios/prompt-injection.md.
+ */
+export const MALICIOUS_ISSUE_FIXTURE_FILES = [
+  'ignore-instructions.md',
+  'forged-system-tag.md',
+  'hidden-markdown-payload.md',
+  'tool-call-injection.md',
+  'cross-platform-impersonation.md',
+] as const;
