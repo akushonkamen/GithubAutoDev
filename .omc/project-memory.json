@@ -96,8 +96,8 @@
   "hotPaths": [
     {
       "path": "docs/cgao_tasklist_v3.md",
-      "accessCount": 10,
-      "lastAccessed": 1783097226976,
+      "accessCount": 28,
+      "lastAccessed": 1783101080741,
       "type": "file"
     },
     {
@@ -119,6 +119,12 @@
       "type": "file"
     },
     {
+      "path": "packages/audit/src/index.ts",
+      "accessCount": 6,
+      "lastAccessed": 1783100246642,
+      "type": "file"
+    },
+    {
       "path": "packages/artifacts/src/index.ts",
       "accessCount": 5,
       "lastAccessed": 1783097250772,
@@ -126,14 +132,8 @@
     },
     {
       "path": "packages/policy/src/index.ts",
-      "accessCount": 4,
-      "lastAccessed": 1783079725373,
-      "type": "file"
-    },
-    {
-      "path": "packages/audit/src/index.ts",
-      "accessCount": 4,
-      "lastAccessed": 1783097313730,
+      "accessCount": 5,
+      "lastAccessed": 1783098787666,
       "type": "file"
     },
     {
@@ -203,6 +203,12 @@
       "type": "file"
     },
     {
+      "path": "packages/github/src/index.ts",
+      "accessCount": 2,
+      "lastAccessed": 1783098787393,
+      "type": "file"
+    },
+    {
       "path": "CONTRIBUTING.md",
       "accessCount": 1,
       "lastAccessed": 1783039381925,
@@ -248,12 +254,6 @@
       "path": "packages/github/tsconfig.json",
       "accessCount": 1,
       "lastAccessed": 1783044783619,
-      "type": "file"
-    },
-    {
-      "path": "packages/github/src/index.ts",
-      "accessCount": 1,
-      "lastAccessed": 1783044783801,
       "type": "file"
     },
     {
