@@ -112,3 +112,9 @@ export type {
   PerAdapterResults,
   Sha,
 } from './gate/types.js';
+
+// T-M6-002 failure fingerprint
+export { FingerprintService, normalizeFilePath } from './gate/fingerprint.js';
+export type { Fingerprint, FingerprintInput } from './gate/fingerprint.js';
+export { normalizeMessage, parseFailures } from './gate/failure-parser.js';
+export type { FailureSpan } from './gate/failure-parser.js';
