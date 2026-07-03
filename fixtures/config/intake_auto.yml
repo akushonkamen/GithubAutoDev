@@ -1,0 +1,48 @@
+# .cgao.yml — intake mode = auto
+# Every qualified IM message becomes a candidate issue without a clarifier
+# confirmation step. Suitable for high-volume internal channels where a
+# human is not on call to confirm each intake.
+schema_version: 1
+repo:
+  name: cgao/intake-auto-example
+  default_branch: main
+gates:
+  spec_sha: true
+  plan_sha: true
+  approval_sha: true
+  head_sha: true
+  base_sha: true
+runners:
+  trusted_control:
+    label: cgao-trusted-runner
+  untrusted_code:
+    label: cgao-untrusted-runner
+intake:
+  enabled: true
+  mode: auto
+  sources:
+    lark:
+      enabled: true
+      triggers:
+        at_bot_only: true
+        explicit_keywords: [建issue, 提需求, bug, 需求]
+      llm:
+        confidence_threshold: 0.75
+        max_clarify_rounds: 3
+    wecom:
+      enabled: true
+      triggers:
+        at_bot_only: true
+        explicit_keywords: [建issue, bug]
+      llm:
+        confidence_threshold: 0.7
+        max_clarify_rounds: 3
+  dedup:
+    window_minutes: 1440
+    key: [source_type, external_id, content_hash]
+  rate_limit:
+    max_llm_calls_per_repo_per_hour: 60
+  security:
+    redact_before_llm: true
+    untrusted_envelope: true
+    reject_external_links: true

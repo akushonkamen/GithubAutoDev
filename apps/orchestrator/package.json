@@ -21,6 +21,7 @@
     "@cgao/github-events": "workspace:*",
     "@cgao/schemas": "workspace:*",
     "hono": "^4.6.0",
+    "yaml": "^2.9.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {

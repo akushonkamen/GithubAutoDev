@@ -1,0 +1,48 @@
+# .cgao.yml — intake mode = off
+# Intake is explicitly disabled. The orchestrator will not consume IM
+# messages even if they arrive on configured webhooks. Use this on
+# repos that have opted out of intake but still use other cgao modules.
+schema_version: 1
+repo:
+  name: cgao/intake-off-example
+  default_branch: main
+gates:
+  spec_sha: true
+  plan_sha: true
+  approval_sha: true
+  head_sha: true
+  base_sha: true
+runners:
+  trusted_control:
+    label: cgao-trusted-runner
+  untrusted_code:
+    label: cgao-untrusted-runner
+intake:
+  enabled: false
+  mode: off
+  sources:
+    lark:
+      enabled: false
+      triggers:
+        at_bot_only: false
+        explicit_keywords: []
+      llm:
+        confidence_threshold: 0.75
+        max_clarify_rounds: 5
+    wecom:
+      enabled: false
+      triggers:
+        at_bot_only: false
+        explicit_keywords: []
+      llm:
+        confidence_threshold: 0.75
+        max_clarify_rounds: 5
+  dedup:
+    window_minutes: 1440
+    key: [source_type, external_id, content_hash]
+  rate_limit:
+    max_llm_calls_per_repo_per_hour: 60
+  security:
+    redact_before_llm: true
+    untrusted_envelope: true
+    reject_external_links: true
