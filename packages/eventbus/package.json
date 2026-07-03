@@ -1,0 +1,17 @@
+{
+  "name": "@cgao/eventbus",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@cgao/schemas": "workspace:*",
+    "zod": "^3.23.0"
+  }
+}
