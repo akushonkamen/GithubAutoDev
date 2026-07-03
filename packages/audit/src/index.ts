@@ -90,3 +90,15 @@ export {
   InMemoryAuditChainService,
   computeRecordHash,
 } from './chain-service.js';
+export {
+  type CheckpointPayload,
+  type CheckpointRecord,
+  type ImmutableStorageAdapter,
+  InMemoryImmutableAdapter,
+  S3ImmutableAdapter,
+  AuditCheckpointWriter,
+  CheckpointVerifier,
+  hashRecords,
+  signCheckpoint,
+  verifyCheckpointSignature,
+} from './checkpoint/index.js';
