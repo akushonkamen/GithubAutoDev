@@ -1591,7 +1591,7 @@ reviewer 不默认读取 executor 的完整自我解释
 
 ## 13. M9：合入模块
 
-### [ ] T-M9-001 实现 gate aggregation
+### [x] T-M9-001 实现 gate aggregation
 
 Spec：第 12.10、15 节  
 优先级：P1  
@@ -1612,7 +1612,7 @@ PolicyDecision writer
 所有 gate 绑定 head_sha/base_sha
 ```
 
-### [ ] T-M9-002 实现 SHA-bound final evaluator
+### [x] T-M9-002 实现 SHA-bound final evaluator
 
 Spec：第 12.10、21、23 节  
 优先级：P0  
@@ -1634,7 +1634,7 @@ current_head_sha 与 tested/reviewed/approved head_sha 不一致时拒绝
 base 不一致时要求重新测试或进入 merge queue
 ```
 
-### [ ] T-M9-003 实现 merge-ready comment
+### [x] T-M9-003 实现 merge-ready comment
 
 Spec：第 12.10、14.2 节  
 优先级：P1  
@@ -1654,7 +1654,7 @@ status comment update
 不暴露 internal artifact URI
 ```
 
-### [ ] T-M9-004 实现 merge execution baseline
+### [x] T-M9-004 实现 merge execution baseline
 
 Spec：第 12.10 节  
 优先级：P1  
@@ -1676,7 +1676,7 @@ merge-manager token 不具备 bypass branch protection 权限
 合入后关闭 issue 并清理 cgao label
 ```
 
-### [ ] T-M9-005 实现 stale SHA merge prevention 回归测试
+### [x] T-M9-005 实现 stale SHA merge prevention 回归测试
 
 Spec：第 6、12.10、21 节  
 优先级：P0  
@@ -1696,7 +1696,7 @@ base branch 前进后不得直接 merge
 final evaluator 拒绝 stale gates
 ```
 
-### [ ] T-M9-006 merge queue 支持
+### [x] T-M9-006 merge queue 支持
 
 Spec：第 12.10、17 节  
 优先级：P2  
