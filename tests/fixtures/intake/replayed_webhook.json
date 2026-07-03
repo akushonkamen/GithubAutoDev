@@ -1,0 +1,34 @@
+{
+  "name": "replayed_webhook",
+  "description": "Same Lark IM webhook payload POSTed 10 times within the dedup window. Only one intake_session MUST be created.",
+  "platform": "lark",
+  "dedup_window_minutes": 1440,
+  "replay_count": 10,
+  "payload": {
+    "event_type": "im.message.receive_v1",
+    "event_id": "ev_dedup_replay_0001",
+    "header": {
+      "event_id": "ev_dedup_replay_0001",
+      "event_type": "im.message.receive_v1",
+      "create_time": "1730000000000"
+    },
+    "event": {
+      "sender": { "sender_id": { "open_id": "ou_user_a" }, "sender_type": "user" },
+      "message": {
+        "message_id": "om_replay_001",
+        "chat_id": "oc_chat_replay",
+        "chat_type": "group",
+        "message_type": "text",
+        "content": "{\"text\":\"@_user_1 deploy broken, please take a look\"}",
+        "mentions": [{ "key": "@_user_1", "id": { "open_id": "ou_bot", "name": "cgao-bot" } }]
+      }
+    }
+  },
+  "expect": {
+    "intake_sessions_created": 1,
+    "issues_created": 1,
+    "http_status_first": 202,
+    "http_status_replays": 200,
+    "replay_dedup": true
+  }
+}

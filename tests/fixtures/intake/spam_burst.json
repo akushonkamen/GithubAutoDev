@@ -1,0 +1,20 @@
+{
+  "name": "spam_burst",
+  "description": "100 near-duplicate messages from the same sender within an hour. external_id differs per message; content is identical up to cosmetic whitespace. Validates rate-limit and content-dedup interaction.",
+  "platform": "lark",
+  "message_count": 100,
+  "sender_open_id": "ou_user_spammer",
+  "dedup_window_minutes": 1440,
+  "rate_limit_per_hour": 60,
+  "message_template": {
+    "text": "@cgao bug: deploy broken, postgres refusing connections",
+    "whitespace_variants": "each message gets randomized leading/trailing whitespace and line breaks"
+  },
+  "expect": {
+    "distinct_external_ids": 100,
+    "dedup_keys_collapsed_by_content_only": false,
+    "intake_sessions_max": 5,
+    "rate_limited_after": 60,
+    "note": "external_id is part of dedup_key, so distinct external_ids with identical content do NOT collapse. Rate-limit (rate_limit_per_repo_per_hour) is the gate that bounds session creation. ≥95% suppression is the product of rate-limit + downstream similarity rejection, not dedup_key alone."
+  }
+}

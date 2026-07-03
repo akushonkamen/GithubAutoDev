@@ -1,0 +1,16 @@
+{
+  "name": "cross_platform_identity",
+  "description": "Same human user sends identical content from Lark and WeCom. The orchestrator MUST treat them as distinct identities — Lark open_id and WeCom user_id are separate namespaces and MUST NOT be auto-merged. Per-platform intake_sessions are created; identity mapping requires explicit CGAO account linking.",
+  "platforms": ["lark", "wecom"],
+  "common_content": "@cgao bug: login page 500",
+  "senders": {
+    "lark": { "open_id": "ou_alice_lark", "display_name": "Alice" },
+    "wecom": { "user_id": "alice_wecom", "display_name": "Alice" }
+  },
+  "expect": {
+    "dedup_keys_distinct": true,
+    "intake_sessions_created": 2,
+    "auto_identity_merge": false,
+    "sender_github_login_auto_populated": false
+  }
+}

@@ -25,6 +25,7 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@cgao/test-utils": "workspace:^",
     "@types/node": "^22.7.0",
     "tsx": "^4.19.0"
   }

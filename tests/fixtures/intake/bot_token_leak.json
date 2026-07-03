@@ -1,0 +1,22 @@
+{
+  "name": "bot_token_leak",
+  "description": "User pastes what looks like a GitHub App installation token (ghs_…) in the message body. The token MUST NOT appear in the dedup_key, content_hash digest, audit log, or any artifact. The content_hash is sha256(canonical content) — one-way, so the token is not recoverable. Detection regex (FORBIDDEN_SECRET_PATTERNS) MAY flag the message and route it through redaction before any LLM call.",
+  "platform": "lark",
+  "sender_open_id": "ou_user_token_leak",
+  "message_text": "help, I think I leaked this: ghs_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "forbidden_secret_patterns": [
+    "ghs_[A-Za-z0-9]{36,}",
+    "gho_[A-Za-z0-9]{36,}",
+    "github_pat_[A-Za-z0-9_]{82}",
+    "-----BEGIN (RSA |EC |)PRIVATE KEY-----",
+    "AKIA[0-9A-Z]{16}"
+  ],
+  "expect": {
+    "token_in_dedup_key": false,
+    "token_in_content_hash": false,
+    "token_in_audit_record": false,
+    "token_in_artifact": false,
+    "redact_before_llm": true,
+    "redacted_placeholder": "[REDACTED:SECRET]"
+  }
+}

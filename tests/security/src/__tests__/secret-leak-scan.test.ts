@@ -42,7 +42,15 @@ function* walk(dir: string): Generator<string> {
 function scan(): { path: string; line: number; pattern: string; line_text: string }[] {
   const hits: { path: string; line: number; pattern: string; line_text: string }[] = [];
   for (const file of walk(REPO_ROOT)) {
-    if (file.includes('security-tests') || file.includes('test-utils/src/fixtures')) continue;
+    if (
+      file.includes('security-tests') ||
+      file.includes('test-utils/src/fixtures') ||
+      file.includes('tests/fixtures/') || // synthetic attack-corpus fixtures
+      file.includes('__tests__/redaction.test.ts') || // redaction corpus — synthetic secrets
+      file.includes('packages/artifacts/src/__tests__/redaction.test.ts')
+    ) {
+      continue;
+    }
     const text = readFileSync(file, 'utf8');
     const lines = text.split('\n');
     for (let i = 0; i < lines.length; i++) {
