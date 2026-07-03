@@ -19,6 +19,7 @@
     "@cgao/events": "workspace:*",
     "@cgao/github": "workspace:*",
     "@cgao/github-events": "workspace:*",
+    "@cgao/observability": "workspace:*",
     "@cgao/policy": "workspace:*",
     "@cgao/runner-broker": "workspace:*",
     "@cgao/schemas": "workspace:*",

@@ -96,14 +96,20 @@
   "hotPaths": [
     {
       "path": "docs/cgao_tasklist_v3.md",
-      "accessCount": 28,
-      "lastAccessed": 1783101080741,
+      "accessCount": 36,
+      "lastAccessed": 1783102168561,
       "type": "file"
     },
     {
       "path": "tests/security/src/__tests__/secret-leak-scan.test.ts",
       "accessCount": 7,
       "lastAccessed": 1783098061210,
+      "type": "file"
+    },
+    {
+      "path": "packages/audit/src/index.ts",
+      "accessCount": 7,
+      "lastAccessed": 1783102221289,
       "type": "file"
     },
     {
@@ -119,15 +125,9 @@
       "type": "file"
     },
     {
-      "path": "packages/audit/src/index.ts",
-      "accessCount": 6,
-      "lastAccessed": 1783100246642,
-      "type": "file"
-    },
-    {
       "path": "packages/artifacts/src/index.ts",
-      "accessCount": 5,
-      "lastAccessed": 1783097250772,
+      "accessCount": 6,
+      "lastAccessed": 1783102221176,
       "type": "file"
     },
     {
@@ -137,15 +137,21 @@
       "type": "file"
     },
     {
+      "path": "tests/security/package.json",
+      "accessCount": 4,
+      "lastAccessed": 1783101756473,
+      "type": "file"
+    },
+    {
       "path": "apps/runner-broker/package.json",
       "accessCount": 3,
       "lastAccessed": 1783097326641,
       "type": "file"
     },
     {
-      "path": "tests/security/package.json",
+      "path": "packages/github/src/index.ts",
       "accessCount": 3,
-      "lastAccessed": 1783098033625,
+      "lastAccessed": 1783102256290,
       "type": "file"
     },
     {
@@ -200,12 +206,6 @@
       "path": "tests/security/src/__tests__/runner-no-secret.test.ts",
       "accessCount": 2,
       "lastAccessed": 1783097266685,
-      "type": "file"
-    },
-    {
-      "path": "packages/github/src/index.ts",
-      "accessCount": 2,
-      "lastAccessed": 1783098787393,
       "type": "file"
     },
     {

@@ -6,6 +6,7 @@
  */
 
 import { InMemoryEventBus } from '@cgao/eventbus';
+import { PrometheusRegistry } from '@cgao/observability';
 import { Hono } from 'hono';
 import { InMemoryDedupStore } from './webhook/dedup-store.js';
 import { type WebhookDeps, handleGithubWebhook } from './webhook/github-route.js';
@@ -25,6 +26,7 @@ app.get('/healthz', (c) =>
 const bus = new InMemoryEventBus();
 const dedup = new InMemoryDedupStore();
 const suppression = new InMemorySuppressionStore();
+const metrics = new PrometheusRegistry();
 
 /**
  * Exported for tests / ops — gives direct access to the bus and stores
@@ -40,6 +42,7 @@ export const __internals = {
   bus,
   dedup,
   suppression,
+  metrics,
   __reset(): void {
     (bus as unknown as { queues: Map<string, unknown[]> }).queues.clear();
     (bus as unknown as { consumers: Map<string, unknown> }).consumers.clear();
@@ -62,6 +65,14 @@ const webhookDeps: WebhookDeps = {
 };
 
 app.post('/github/webhook', (c) => handleGithubWebhook(c, webhookDeps));
+
+app.get('/metrics', () => {
+  const body = metrics.format();
+  return new Response(body, {
+    status: 200,
+    headers: { 'content-type': 'text/plain; version=0.0.4; charset=utf-8' },
+  });
+});
 
 const port = Number(process.env.PORT ?? 8787);
 
