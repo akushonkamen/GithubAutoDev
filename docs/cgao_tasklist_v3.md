@@ -1718,7 +1718,7 @@ merge queue 通过后可完成归档
 
 ## 14. M10：Reconciler、审计与运营
 
-### [ ] T-M10-001 实现 active run reconciler
+### [x] T-M10-001 实现 active run reconciler
 
 Spec：第 12.2 节  
 优先级：P1  
@@ -1739,7 +1739,7 @@ DriftDetector
 DB 与 GitHub drift 可自动发现并生成修复事件
 ```
 
-### [ ] T-M10-002 实现 comment/label reconciliation
+### [x] T-M10-002 实现 comment/label reconciliation
 
 Spec：第 12.2、14.1、14.2 节  
 优先级：P1  
@@ -1760,7 +1760,7 @@ status comment 被删后可重建
 label 投影被人工改错后可恢复
 ```
 
-### [ ] T-M10-003 实现 observability baseline
+### [x] T-M10-003 实现 observability baseline
 
 Spec：第 19 节  
 优先级：P1  
@@ -1781,7 +1781,7 @@ run_id/event_id/module/state_from/state_to/reason 出现在日志中
 核心指标可采集
 ```
 
-### [ ] T-M10-004 实现成本与限流控制
+### [x] T-M10-004 实现成本与限流控制
 
 Spec：第 12.11、18、19 节  
 优先级：P1  
@@ -1803,7 +1803,7 @@ ActorQuotaService
 预算耗尽进入 WAITING_BUDGET_APPROVAL
 ```
 
-### [ ] T-M10-005 实现 artifact retention 与访问控制
+### [x] T-M10-005 实现 artifact retention 与访问控制
 
 Spec：第 11、15、19 节  
 优先级：P1  
@@ -1823,7 +1823,7 @@ public_summary/internal_log/security_sensitive/audit_restricted 分类生效
 过期 artifact 可归档或删除
 ```
 
-### [ ] T-M10-006 实现 audit checkpoint
+### [x] T-M10-006 实现 audit checkpoint
 
 Spec：第 19 节  
 优先级：P1  
