@@ -18,12 +18,7 @@
  */
 
 import type { GateResultsReader } from './gate-results-reader.js';
-import type {
-  AggregatedGates,
-  GateEvaluation,
-  GateKind,
-  Sha,
-} from './types.js';
+import type { AggregatedGates, GateEvaluation, GateKind, Sha } from './types.js';
 
 export interface AggregateInput {
   runId: string;

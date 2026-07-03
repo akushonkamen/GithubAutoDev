@@ -9,6 +9,9 @@
 
 import { InMemoryArtifactStore } from '@cgao/artifacts';
 import { describe, expect, it } from 'vitest';
+import { GateAggregator } from '../gate-aggregator.js';
+import { GateResultsReader } from '../gate-results-reader.js';
+import { GitHubStateHydrator } from '../github-state-hydrator.js';
 import {
   DEFAULT_QUEUE_DECLARATIONS,
   MergeGroupHandler,
@@ -17,11 +20,8 @@ import {
   type MergeQueuePort,
   type RequiredCheckDeclaration,
 } from '../index.js';
-import { GateAggregator } from '../gate-aggregator.js';
-import { GateResultsReader } from '../gate-results-reader.js';
-import { GitHubStateHydrator } from '../github-state-hydrator.js';
+import type { BranchProtectionSnapshot, LivePrSnapshot, TrustedGitHubPrPort } from '../index.js';
 import { MergeFinalEvaluator } from '../merge-final-evaluator.js';
-import type { LivePrSnapshot, TrustedGitHubPrPort, BranchProtectionSnapshot } from '../index.js';
 
 const HEAD = 'a'.repeat(40);
 const BASE = 'b'.repeat(40);
@@ -143,7 +143,11 @@ describe('T-M9-006 MergeGroupHandler', () => {
           };
         },
       } as never,
-      findings: { async findBlocking() { return []; } } as never,
+      findings: {
+        async findBlocking() {
+          return [];
+        },
+      } as never,
     });
     const aggregator = new GateAggregator(reader);
     const hydrator = new GitHubStateHydrator(stub);
@@ -164,7 +168,11 @@ describe('T-M9-006 MergeGroupHandler', () => {
           return { testedHeadSha: HEAD, testedBaseSha: BASE };
         },
       },
-      risk: { async isHighRisk() { return false; } },
+      risk: {
+        async isHighRisk() {
+          return false;
+        },
+      },
     });
     const event: MergeQueueEvent = {
       repo: 'cgao/test',
@@ -192,7 +200,11 @@ describe('T-M9-006 MergeGroupHandler', () => {
           return { testedHeadSha: HEAD, testedBaseSha: BASE };
         },
       },
-      risk: { async isHighRisk() { return false; } },
+      risk: {
+        async isHighRisk() {
+          return false;
+        },
+      },
     });
     const out = await handler.onMergeGroup({
       repo: 'cgao/test',

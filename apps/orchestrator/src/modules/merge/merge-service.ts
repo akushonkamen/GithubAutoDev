@@ -19,10 +19,7 @@
 
 import type { AuditChainService } from '@cgao/audit';
 import { BranchProtectionChecker } from './branch-protection-checker.js';
-import {
-  validateMergeTokenProfile,
-  type MergeTokenProfile,
-} from './merge-credential-profile.js';
+import { type MergeTokenProfile, validateMergeTokenProfile } from './merge-credential-profile.js';
 import type { MergeDecision } from './types.js';
 
 /** Trusted GitHub merge port. Wires to the merge-manager credential profile. */
@@ -102,9 +99,7 @@ export class MergeService {
 
     const token = await this.deps.resolveMergeToken({ runId: input.runId });
     if (!token.isMergeManager) {
-      reasons.push(
-        `merge-manager credential invalid: ${token.validationErrors.join('; ')}`,
-      );
+      reasons.push(`merge-manager credential invalid: ${token.validationErrors.join('; ')}`);
     }
 
     if (reasons.length > 0) {

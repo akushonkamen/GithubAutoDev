@@ -12,9 +12,9 @@
 import { describe, expect, it } from 'vitest';
 import { renderMergeReadyBody } from '../merge-ready-renderer.js';
 import {
-  StatusCommentUpdater,
   type PrComment,
   type StatusCommentBroker,
+  StatusCommentUpdater,
 } from '../status-comment-updater.js';
 import type { AggregatedGates, MergeDecision } from '../types.js';
 

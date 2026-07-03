@@ -11,6 +11,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
+import { GateAggregator } from '../gate-aggregator.js';
 import { GateResultsReader } from '../gate-results-reader.js';
 import type {
   AiReviewLookup,
@@ -22,11 +23,10 @@ import type {
   TestGateLookup,
   TestGateRecord,
 } from '../gate-results-reader.js';
-import { GateAggregator } from '../gate-aggregator.js';
 import {
-  PolicyDecisionWriter,
   type PolicyDecisionRecord,
   type PolicyDecisionRepository,
+  PolicyDecisionWriter,
 } from '../policy-decision-writer.js';
 
 const HEAD = 'a'.repeat(40);
@@ -85,20 +85,28 @@ class InMemoryPolicyDecisions implements PolicyDecisionRepository {
   }
 }
 
-function makeReader(overrides: Partial<{
-  test: FakeTestGates;
-  ai: FakeAiReviews;
-  human: FakeHumanApprovals;
-  risk: FakeRisk;
-  blocking: { findBlocking(prNumber: number): Promise<readonly { id: string; headSha: string }[]> };
-}> = {}) {
+function makeReader(
+  overrides: Partial<{
+    test: FakeTestGates;
+    ai: FakeAiReviews;
+    human: FakeHumanApprovals;
+    risk: FakeRisk;
+    blocking: {
+      findBlocking(prNumber: number): Promise<readonly { id: string; headSha: string }[]>;
+    };
+  }> = {},
+) {
   const test = overrides.test ?? new FakeTestGates();
   const ai = overrides.ai ?? new FakeAiReviews();
   const human = overrides.human ?? new FakeHumanApprovals();
   const risk = overrides.risk ?? new FakeRisk();
   const findings =
     overrides.blocking ??
-    ({ async findBlocking() { return []; } } as unknown as {
+    ({
+      async findBlocking() {
+        return [];
+      },
+    } as unknown as {
       findBlocking(prNumber: number): Promise<readonly { id: string; headSha: string }[]>;
     });
   const reader = new GateResultsReader({
@@ -344,8 +352,8 @@ describe('T-M9-001 PolicyDecisionWriter', () => {
       },
       requiresHumanReview: true,
     });
-    const highRiskRecord = repo.rows.find((r) =>
-      (r.reason as { gate?: string }).gate === 'high_risk_human_review_required',
+    const highRiskRecord = repo.rows.find(
+      (r) => (r.reason as { gate?: string }).gate === 'high_risk_human_review_required',
     );
     expect(highRiskRecord).toBeDefined();
     expect(highRiskRecord?.decision).toBe('deny');

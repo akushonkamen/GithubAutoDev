@@ -21,16 +21,16 @@
  */
 
 import { InMemoryArtifactStore } from '@cgao/artifacts';
-import { describe, expect, it } from 'vitest';
 import {
+  type BranchProtectionSnapshot,
   GateAggregator,
   GateResultsReader,
   GitHubStateHydrator,
-  MergeFinalEvaluator,
-  type BranchProtectionSnapshot,
   type LivePrSnapshot,
+  MergeFinalEvaluator,
   type TrustedGitHubPrPort,
 } from '@cgao/orchestrator';
+import { describe, expect, it } from 'vitest';
 
 const HEAD_A = 'a'.repeat(40);
 const HEAD_B = 'c'.repeat(40);
@@ -116,7 +116,11 @@ function makeReaderDeps() {
       };
     },
   };
-  const findings = { async findBlocking() { return []; } };
+  const findings = {
+    async findBlocking() {
+      return [];
+    },
+  };
   return { testGates, aiReviews, humanApprovals, risk, findings };
 }
 

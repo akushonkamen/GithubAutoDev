@@ -11,6 +11,8 @@
 
 import { InMemoryArtifactStore } from '@cgao/artifacts';
 import { describe, expect, it } from 'vitest';
+import { GateAggregator } from '../gate-aggregator.js';
+import { GateResultsReader } from '../gate-results-reader.js';
 import {
   type BranchProtectionSnapshot,
   GitHubStateHydrator,
@@ -18,8 +20,6 @@ import {
   type TrustedGitHubPrPort,
 } from '../github-state-hydrator.js';
 import { MergeFinalEvaluator } from '../merge-final-evaluator.js';
-import { GateAggregator } from '../gate-aggregator.js';
-import { GateResultsReader } from '../gate-results-reader.js';
 
 const HEAD = 'a'.repeat(40);
 const BASE = 'b'.repeat(40);
@@ -105,7 +105,11 @@ function makeReaderDeps() {
       };
     },
   };
-  const findings = { async findBlocking() { return []; } };
+  const findings = {
+    async findBlocking() {
+      return [];
+    },
+  };
   return { testGates, aiReviews, humanApprovals, risk, findings };
 }
 

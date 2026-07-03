@@ -21,11 +21,7 @@
  */
 
 import type { ReviewFindingRepo } from '../review/review-finding-repo.js';
-import type {
-  GateKind,
-  GateEvaluation,
-  Sha,
-} from './types.js';
+import type { GateEvaluation, GateKind, Sha } from './types.js';
 
 /**
  * Per-PR approval signal recorded by the human-review path.
@@ -181,9 +177,10 @@ export class GateResultsReader {
     evaluations.ai_review = {
       kind: 'ai_review',
       passed: codeOk && secOk,
-      reason: codeOk && secOk
-        ? 'code + security reviewers passed at current head'
-        : `ai review incomplete (code=${codeOk}, security=${secOk})`,
+      reason:
+        codeOk && secOk
+          ? 'code + security reviewers passed at current head'
+          : `ai review incomplete (code=${codeOk}, security=${secOk})`,
       evidenceRefs: [codeReview?.reviewArtifactRef, secReview?.reviewArtifactRef].filter(
         (x): x is string => typeof x === 'string',
       ),

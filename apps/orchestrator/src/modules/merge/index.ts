@@ -72,9 +72,7 @@ export {
   type MergeGroupHandlerDeps,
   type MergeGroupHandleResult,
 } from './merge-group-handler.js';
-export type {
-  AggregateInput,
-} from './gate-aggregator.js';
+export type { AggregateInput } from './gate-aggregator.js';
 export type {
   AggregatedGates,
   GateEvaluation,

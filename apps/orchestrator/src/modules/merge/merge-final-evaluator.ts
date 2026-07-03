@@ -17,11 +17,11 @@
 import { createHash } from 'node:crypto';
 import { type Artifact, type ArtifactStore, computeArtifactKey } from '@cgao/artifacts';
 import { stableJsonStringify } from '@cgao/schemas';
-import { GateAggregator } from './gate-aggregator.js';
-import {
-  type BranchProtectionSnapshot,
+import type { GateAggregator } from './gate-aggregator.js';
+import type {
+  BranchProtectionSnapshot,
   GitHubStateHydrator,
-  type LivePrSnapshot,
+  LivePrSnapshot,
 } from './github-state-hydrator.js';
 import type { AggregatedGates, MergeDecision, Sha } from './types.js';
 
@@ -89,10 +89,10 @@ export class MergeFinalEvaluator {
 
     // 1. PR-state checks.
     if (live.mergeableState === 'blocked') {
-      reasons.push(`github mergeable_state=blocked`);
+      reasons.push('github mergeable_state=blocked');
     }
     if (live.mergeableState === 'dirty') {
-      reasons.push(`github mergeable_state=dirty (merge conflicts)`);
+      reasons.push('github mergeable_state=dirty (merge conflicts)');
     }
 
     // 2. SHA-binding: head sha drift → refuse (force-push case).
@@ -146,7 +146,11 @@ export class MergeFinalEvaluator {
     }
 
     // 6. Branch protection — required checks must be satisfiable.
-    if (hydrated.protection && hydrated.protection.requiredCheckCount > 0 && !aggregated.mergeable) {
+    if (
+      hydrated.protection &&
+      hydrated.protection.requiredCheckCount > 0 &&
+      !aggregated.mergeable
+    ) {
       reasons.push(
         `branch protection requires ${hydrated.protection.requiredCheckCount} check(s); merge would fail`,
       );

@@ -18,19 +18,22 @@
  *     handles re-queue / refuse.
  */
 
+import type { MergeFinalEvaluator } from './merge-final-evaluator.js';
 import {
   MergeQueueAdapter,
   type MergeQueueEvent,
   type MergeQueuePort,
 } from './merge-queue-adapter.js';
-import { MergeFinalEvaluator } from './merge-final-evaluator.js';
 
 export interface MergeGroupHandlerDeps {
   queue: MergeQueueAdapter | MergeQueuePort;
   evaluator: MergeFinalEvaluator;
   /** Run state reader — gives (testedHeadSha, testedBaseSha) for a runId. */
   runState: {
-    getTestedShas(args: { runId: string }): Promise<{ testedHeadSha: string; testedBaseSha: string }>;
+    getTestedShas(args: { runId: string }): Promise<{
+      testedHeadSha: string;
+      testedBaseSha: string;
+    }>;
   };
   /** Risk classification for the run (drives requiresHumanReview). */
   risk: { isHighRisk(args: { runId: string }): Promise<boolean> };

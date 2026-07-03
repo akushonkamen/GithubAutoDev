@@ -15,18 +15,17 @@
 import { InMemoryAuditChainService } from '@cgao/audit';
 import { describe, expect, it } from 'vitest';
 import { BranchProtectionChecker } from '../branch-protection-checker.js';
+import type { BranchProtectionSnapshot } from '../github-state-hydrator.js';
 import {
   DEFAULT_CGAO_LABELS,
-  IssueCloseService,
   type IssueClosePort,
+  IssueCloseService,
 } from '../issue-close-service.js';
 import {
-  validateMergeTokenProfile,
-  MERGE_TOKEN_FORBIDDEN_SCOPES,
   MERGE_TOKEN_REQUIRED_SCOPES,
+  validateMergeTokenProfile,
 } from '../merge-credential-profile.js';
-import { MergeService, type MergeExecutionPort } from '../merge-service.js';
-import type { BranchProtectionSnapshot } from '../github-state-hydrator.js';
+import { type MergeExecutionPort, MergeService } from '../merge-service.js';
 import type { MergeDecision } from '../types.js';
 
 const HEAD = 'a'.repeat(40);

@@ -34,7 +34,12 @@ export interface StatusCommentBroker {
     body: string;
   }): Promise<{ commentId: number }>;
   /** Edit the body of an existing comment. */
-  editComment(args: { repo: string; prNumber: number; commentId: number; body: string }): Promise<void>;
+  editComment(args: {
+    repo: string;
+    prNumber: number;
+    commentId: number;
+    body: string;
+  }): Promise<void>;
 }
 
 export interface PrComment {

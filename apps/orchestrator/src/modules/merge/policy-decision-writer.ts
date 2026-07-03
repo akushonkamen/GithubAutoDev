@@ -46,14 +46,6 @@ export interface PolicyDecisionWriteInput {
   idFactory?: () => string;
 }
 
-const GATE_TO_REASON_KEY: Record<GateKind, string> = {
-  test: 'test',
-  ai_review: 'aiReview',
-  human_review: 'humanReview',
-  risk_policy: 'riskPolicy',
-  security_findings: 'securityFindings',
-};
-
 export class PolicyDecisionWriter {
   constructor(private readonly repo: PolicyDecisionRepository) {}
 
@@ -77,9 +69,8 @@ export class PolicyDecisionWriter {
           reason: gate?.reason ?? 'gate missing',
           evidenceRefs: gate?.evidenceRefs ?? [],
           staleSignalsExcluded:
-            input.aggregated.excludedStale
-              .filter((e) => e.kind === kind)
-              .map((e) => e.reason) ?? [],
+            input.aggregated.excludedStale.filter((e) => e.kind === kind).map((e) => e.reason) ??
+            [],
         },
         headSha: input.aggregated.headSha,
         baseSha: input.aggregated.baseSha,

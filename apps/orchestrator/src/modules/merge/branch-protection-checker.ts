@@ -36,9 +36,7 @@ export class BranchProtectionChecker {
       return { ok: false, reasons };
     }
     if (input.protection.requiredReviewCount < floor) {
-      reasons.push(
-        `required reviews ${input.protection.requiredReviewCount} < floor ${floor}`,
-      );
+      reasons.push(`required reviews ${input.protection.requiredReviewCount} < floor ${floor}`);
     }
     if (!input.protection.enforceAdmins) {
       // Spec §12.10: merge-manager must not require an admin override.

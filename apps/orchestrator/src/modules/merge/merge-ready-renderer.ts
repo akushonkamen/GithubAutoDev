@@ -59,9 +59,11 @@ function gateLine(kind: GateKind, gate: GateEvaluation | undefined): string {
 export function renderMergeReadyBody(input: RenderMergeReadyInput): string {
   const a = input.aggregated;
   const lines: string[] = [];
-  lines.push(`## cgao: merge-ready`);
+  lines.push('## cgao: merge-ready');
   lines.push('');
-  lines.push(`PR #${input.prNumber} is ready to merge. All gates passed at \`${a.headSha.slice(0, 10)}\`.`);
+  lines.push(
+    `PR #${input.prNumber} is ready to merge. All gates passed at \`${a.headSha.slice(0, 10)}\`.`,
+  );
   lines.push('');
   lines.push('| Gate | Status |');
   lines.push('|---|---|');
