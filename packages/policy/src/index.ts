@@ -45,3 +45,13 @@ export function evaluatePolicy(ctx: PolicyContext): PolicyDecision {
   }
   return 'allow';
 }
+
+export {
+  type BoundAction,
+  type GateCheck,
+  type GateShas,
+  type StaleEventResult,
+  GateGuard,
+  HashBindingService,
+  classifyStaleness,
+} from './gates.js';
