@@ -1485,7 +1485,7 @@ DB unique constraint 和 advisory lock 生效
 
 ## 12. M8：审查模块
 
-### [ ] T-M8-001 实现 code-reviewer runner
+### [x] T-M8-001 实现 code-reviewer runner
 
 Spec：第 12.9、13.2 节  
 优先级：P1  
@@ -1507,7 +1507,7 @@ ReviewRunner
 review comment 经 trusted broker 写入 GitHub
 ```
 
-### [ ] T-M8-002 实现 security-reviewer runner
+### [x] T-M8-002 实现 security-reviewer runner
 
 Spec：第 12.9 节  
 优先级：P1  
@@ -1527,7 +1527,7 @@ auth/payment/secret/input validation 相关变更触发安全审查
 security finding 可标记 blocking
 ```
 
-### [ ] T-M8-003 实现 review_findings 存储
+### [x] T-M8-003 实现 review_findings 存储
 
 Spec：第 12.9、15 节  
 优先级：P1  
@@ -1548,7 +1548,7 @@ finding 绑定 head_sha
 blocking finding 可查询
 ```
 
-### [ ] T-M8-004 实现 finding lifecycle
+### [x] T-M8-004 实现 finding lifecycle
 
 Spec：第 12.9 节  
 优先级：P1  
@@ -1569,7 +1569,7 @@ fixed 需要同类 reviewer 在新 head_sha 上明确确认
 dismissed 需要 maintainer reason
 ```
 
-### [ ] T-M8-005 实现 reviewer context isolation
+### [x] T-M8-005 实现 reviewer context isolation
 
 Spec：第 5、12.9 节  
 优先级：P1  
