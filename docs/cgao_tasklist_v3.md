@@ -1081,7 +1081,7 @@ agent run 记录 role/model/task/input_artifact/output_artifact
 失败可重试并写 audit
 ```
 
-### [ ] T-M5-002 接入 Claude Code Action baseline
+### [x] T-M5-002 接入 Claude Code Action baseline
 
 Spec：第 17 节  
 优先级：P0  
@@ -1102,7 +1102,7 @@ prompt artifact loader
 runner 输出写回 artifact
 ```
 
-### [ ] T-M5-003 拆分 trusted control runner 与 untrusted code runner
+### [x] T-M5-003 拆分 trusted control runner 与 untrusted code runner
 
 Spec：第 8、13、17 节  
 优先级：P0  
@@ -1125,7 +1125,7 @@ CredentialProfileService
 GitHub 写操作只能通过 trusted control path
 ```
 
-### [ ] T-M5-004 实现 no-secret runner profile
+### [x] T-M5-004 实现 no-secret runner profile
 
 Spec：第 13.1、13.3、20 节  
 优先级：P0  
@@ -1146,7 +1146,7 @@ TokenPresenceTest
 恶意测试打印 env 时无敏感值
 ```
 
-### [ ] T-M5-005 实现 filesystem sandbox baseline
+### [x] T-M5-005 实现 filesystem sandbox baseline
 
 Spec：第 13.3 节  
 优先级：P0  
@@ -1168,7 +1168,7 @@ allowed path 内脚本无法修改 forbidden path
 sandbox violation 进入 POLICY_DENIED
 ```
 
-### [ ] T-M5-006 实现 clean checkout validation
+### [x] T-M5-006 实现 clean checkout validation
 
 Spec：第 12.6、13.3 节  
 优先级：P0  
@@ -1190,7 +1190,7 @@ agent 结束后只输出 patch
 脏 workspace 不直接进入测试或 PR
 ```
 
-### [ ] T-M5-007 实现 protected file policy
+### [x] T-M5-007 实现 protected file policy
 
 Spec：第 12.11、18 节  
 优先级：P0  
@@ -1210,7 +1210,7 @@ RiskEscalationHook
 protected file 变更禁止自动合入
 ```
 
-### [ ] T-M5-008 实现开发模块主流程
+### [x] T-M5-008 实现开发模块主流程
 
 Spec：第 12.6 节  
 优先级：P0  
@@ -1232,7 +1232,7 @@ plan.approved 后可启动 executor task
 失败可进入 dev.failed 或 fix.requested
 ```
 
-### [ ] T-M5-009 Forbidden path escape 回归测试
+### [x] T-M5-009 Forbidden path escape 回归测试
 
 Spec：第 6、13.3、21 节  
 优先级：P0  
