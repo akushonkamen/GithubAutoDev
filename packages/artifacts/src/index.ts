@@ -47,3 +47,5 @@ export interface ArtifactStore {
   read(key: string): Promise<Artifact | null>;
   list(filter: { repo: string; runId?: string; kind?: ArtifactKind }): Promise<Artifact[]>;
 }
+
+export { InMemoryArtifactStore, FsArtifactStore } from './store.js';
