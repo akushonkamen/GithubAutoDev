@@ -99,9 +99,7 @@ describe('CommitBuilder (T-M7-002, spec §12.8 / §12.11)', () => {
       // the post-apply sweep is what catches it.
       patch: baseEmptyPatch({
         allowedPaths: ['.github/**', 'src/**'],
-        entries: [
-          { path: '.github/workflows/ci.yml', contents: 'evil', deleted: false },
-        ],
+        entries: [{ path: '.github/workflows/ci.yml', contents: 'evil', deleted: false }],
       }),
       message: baseMessageInput({ runId: 'run_pv' }),
       base: new Map(),
@@ -140,7 +138,7 @@ describe('CommitBuilder (T-M7-002, spec §12.8 / §12.11)', () => {
   });
 
   it('the commit message embeds issue, run_id, spec_id, plan_id@plan_sha', async () => {
-    const git = new InMemoryGitCommitPort();
+    const _git = new InMemoryGitCommitPort();
     const audit = new InMemoryAuditChainService();
     const captured: string[] = [];
     const spyGit: GitCommitPort = {
@@ -176,7 +174,7 @@ describe('CommitBuilder (T-M7-002, spec §12.8 / §12.11)', () => {
     expect(msg).toContain('issue #7');
     expect(msg).toContain('run-id run_msg');
     expect(msg).toContain('Spec-Id: spec-99');
-    expect(msg).toContain('Plan-Id: plan-42@' + planSha);
+    expect(msg).toContain(`Plan-Id: plan-42@${planSha}`);
   });
 
   it('honors an injected ProtectedFileDetector', async () => {

@@ -28,12 +28,12 @@ describe('renderCommitTrailers (T-M7-002, spec §12.8)', () => {
     const t = renderCommitTrailers(baseInput);
     expect(t).toContain('Refs: issue #42, run-id run_abc');
     expect(t).toContain('Spec-Id: spec-0001');
-    expect(t).toContain('Plan-Id: plan-0001@' + 'a'.repeat(64));
+    expect(t).toContain(`Plan-Id: plan-0001@${'a'.repeat(64)}`);
     // Order: Refs, Spec-Id, Plan-Id
     expect(t.split('\n')).toEqual([
       'Refs: issue #42, run-id run_abc',
       'Spec-Id: spec-0001',
-      'Plan-Id: plan-0001@' + 'a'.repeat(64),
+      `Plan-Id: plan-0001@${'a'.repeat(64)}`,
     ]);
   });
 
@@ -53,7 +53,7 @@ describe('renderCommitMessage (T-M7-002)', () => {
         '',
         'Refs: issue #42, run-id run_abc',
         'Spec-Id: spec-0001',
-        'Plan-Id: plan-0001@' + 'a'.repeat(64),
+        `Plan-Id: plan-0001@${'a'.repeat(64)}`,
       ].join('\n'),
     );
   });
@@ -83,9 +83,7 @@ describe('renderCommitMessage (T-M7-002)', () => {
   });
 
   it('rejects empty summary', () => {
-    expect(() => renderCommitMessage({ ...baseInput, summary: '   ' })).toThrow(
-      CommitMessageError,
-    );
+    expect(() => renderCommitMessage({ ...baseInput, summary: '   ' })).toThrow(CommitMessageError);
   });
 
   it('rejects summary with embedded newlines', () => {
@@ -96,8 +94,6 @@ describe('renderCommitMessage (T-M7-002)', () => {
 
   it('rejects summary longer than 72 chars', () => {
     const long = 'a'.repeat(73);
-    expect(() => renderCommitMessage({ ...baseInput, summary: long })).toThrow(
-      CommitMessageError,
-    );
+    expect(() => renderCommitMessage({ ...baseInput, summary: long })).toThrow(CommitMessageError);
   });
 });

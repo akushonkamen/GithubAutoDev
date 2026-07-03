@@ -48,7 +48,10 @@ export interface TraceabilityBlockInput {
 const ARTIFACT_URI_REGEX = /\bartifact:\/\/\S+/u;
 
 export class TraceabilityBlockError extends Error {
-  constructor(message: string, readonly field: string) {
+  constructor(
+    message: string,
+    readonly field: string,
+  ) {
     super(message);
     this.name = 'TraceabilityBlockError';
   }
@@ -111,10 +114,7 @@ export function renderTraceabilityBlock(input: TraceabilityBlockInput): string {
   // Defensive: artifact:// URIs must NEVER appear in the block.
   const rendered = lines.join('\n');
   if (ARTIFACT_URI_REGEX.test(rendered)) {
-    throw new TraceabilityBlockError(
-      'artifact:// URI leaked into traceability block',
-      'rendered',
-    );
+    throw new TraceabilityBlockError('artifact:// URI leaked into traceability block', 'rendered');
   }
   return rendered;
 }

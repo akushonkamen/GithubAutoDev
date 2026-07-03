@@ -41,7 +41,8 @@ const MANIFEST_PATHS = new Set(['package.json', 'package-lock.json']);
 const LOCKFILE_PATHS = new Set(['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock']);
 
 interface ParsedManifest {
-  deps: Record<string, string>;
+  /** Each dep section: dependencies, devDependencies, etc. */
+  deps: Record<string, Record<string, string>>;
   scripts: Record<string, string>;
 }
 
@@ -117,8 +118,8 @@ export function detectDependencyChanges(args: {
       'optionalDependencies',
     ] as const;
     for (const section of depSections) {
-      const beforeDeps = (before.deps as Record<string, Record<string, string>>)[section] ?? {};
-      const afterDeps = (after.deps as Record<string, Record<string, string>>)[section] ?? {};
+      const beforeDeps = before.deps[section] ?? {};
+      const afterDeps = after.deps[section] ?? {};
       const allNames = new Set([...Object.keys(beforeDeps), ...Object.keys(afterDeps)]);
       const added: string[] = [];
       const removed: string[] = [];
@@ -155,26 +156,24 @@ function safeParseManifest(raw: string | undefined): ParsedManifest {
   if (!raw) return { deps: {}, scripts: {} };
   try {
     const obj = JSON.parse(raw) as Record<string, unknown>;
-    const deps = pick(obj, [
+    const depSections = [
       'dependencies',
       'devDependencies',
       'peerDependencies',
       'optionalDependencies',
-    ]);
-    const scripts = (obj.scripts && typeof obj.scripts === 'object'
-      ? obj.scripts
-      : {}) as Record<string, string>;
-    return { deps: deps as Record<string, string>, scripts };
+    ] as const;
+    const deps: Record<string, Record<string, string>> = {};
+    for (const section of depSections) {
+      const v = obj[section];
+      if (v && typeof v === 'object') {
+        deps[section] = v as Record<string, string>;
+      }
+    }
+    const scripts =
+      obj.scripts && typeof obj.scripts === 'object' ? (obj.scripts as Record<string, string>) : {};
+    return { deps, scripts };
   } catch {
     // Unparseable manifest → treat as empty so we don't blow up the gate.
     return { deps: {}, scripts: {} };
   }
-}
-
-function pick(obj: Record<string, unknown>, keys: readonly string[]): Record<string, unknown> {
-  const out: Record<string, unknown> = {};
-  for (const k of keys) {
-    if (k in obj) out[k] = obj[k];
-  }
-  return out;
 }

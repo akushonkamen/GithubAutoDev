@@ -192,12 +192,10 @@ export class PullRequestService {
 export class WorkflowRunPrAdapter implements WorkflowRunPrPort {
   constructor(
     private readonly repo: {
-      findById(id: string): Promise<{ id: string; version: number; prNumber: number | null } | null>;
-      update(
+      findById(
         id: string,
-        expectedVersion: number,
-        patch: { prNumber?: number },
-      ): Promise<unknown>;
+      ): Promise<{ id: string; version: number; prNumber: number | null } | null>;
+      update(id: string, expectedVersion: number, patch: { prNumber?: number }): Promise<unknown>;
     },
   ) {}
 

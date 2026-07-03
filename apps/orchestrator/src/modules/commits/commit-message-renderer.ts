@@ -38,7 +38,10 @@ export interface CommitMessageInput extends CommitTraceabilityInput {
 const MAX_SUMMARY_LEN = 72;
 
 export class CommitMessageError extends Error {
-  constructor(message: string, readonly field: string) {
+  constructor(
+    message: string,
+    readonly field: string,
+  ) {
     super(message);
     this.name = 'CommitMessageError';
   }

@@ -14,13 +14,13 @@
 
 import { InMemoryAuditChainService } from '@cgao/audit';
 import { describe, expect, it } from 'vitest';
+import { authenticatePrMarker } from '../pr-marker.js';
 import {
   type GitHubPrPort,
   type OpenPr,
   PullRequestService,
   type WorkflowRunPrPort,
 } from '../pull-request-service.js';
-import { authenticatePrMarker } from '../pr-marker.js';
 
 const SECRET = 'test-secret';
 
@@ -138,7 +138,9 @@ describe('PullRequestService (T-M7-003, spec §12.8 / §15)', () => {
 
     // Body contains a verified marker.
     expect(github.created.length).toBe(1);
-    const parsed = authenticatePrMarker({ secret: SECRET, body: github.created[0]!.body });
+    const created = github.created[0];
+    if (!created) throw new Error('expected one created PR');
+    const parsed = authenticatePrMarker({ secret: SECRET, body: created.body });
     expect(parsed).not.toBeNull();
     expect(parsed?.runId).toBe(baseInput.runId);
     expect(parsed?.headSha).toBe(baseInput.headSha);
@@ -163,9 +165,7 @@ describe('PullRequestService (T-M7-003, spec §12.8 / §15)', () => {
     const runs = new FakeRuns();
     const { svc } = makeService(github, runs);
 
-    const results = await Promise.all(
-      Array.from({ length: 10 }, () => svc.createPr(baseInput)),
-    );
+    const results = await Promise.all(Array.from({ length: 10 }, () => svc.createPr(baseInput)));
 
     const numbers = new Set(results.map((r) => r.prNumber));
     expect(numbers.size).toBe(1);

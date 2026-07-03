@@ -53,8 +53,7 @@ function maxSeverity(severities: Iterable<RiskSeverity>): RiskSeverity {
  * Map a DependencyRiskFinding to a PolicyDecision. Pure.
  */
 export function findingToDecision(finding: DependencyRiskFinding): ScaPolicyDecision {
-  const needsHuman =
-    finding.severity === 'high' || finding.severity === 'critical';
+  const needsHuman = finding.severity === 'high' || finding.severity === 'critical';
   return {
     code: finding.kind,
     severity: finding.severity,

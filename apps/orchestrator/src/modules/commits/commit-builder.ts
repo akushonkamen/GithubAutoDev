@@ -18,8 +18,8 @@
 import { createHash } from 'node:crypto';
 import type { AuditChainService } from '@cgao/audit';
 import {
-  ProtectedFileDetector,
   type OverlayEntry,
+  ProtectedFileDetector,
   applyToCleanCheckout,
 } from '@cgao/runner-broker';
 import { renderCommitMessage } from './commit-message-renderer.js';

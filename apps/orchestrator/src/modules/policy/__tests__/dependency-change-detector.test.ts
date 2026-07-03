@@ -8,13 +8,14 @@
  *   - ScaHook.evaluateAndEscalate bumps RiskEscalationHook's floor.
  */
 
-import { ProtectedFileDetector, RiskEscalationHook } from '@cgao/runner-broker';
-import { describe, expect, it } from 'vitest';
 import {
-  detectDependencyChanges,
-  type DependencyRiskFinding,
-} from '../dependency-change-detector.js';
-import { findingToDecision, ScaHook } from '../sca-hook.js';
+  ProtectedFileDetector,
+  type RiskClassifierLike,
+  RiskEscalationHook,
+} from '@cgao/runner-broker';
+import { describe, expect, it } from 'vitest';
+import { detectDependencyChanges } from '../dependency-change-detector.js';
+import { ScaHook, findingToDecision } from '../sca-hook.js';
 
 function manifest(deps: Record<string, string>, scripts: Record<string, string> = {}): string {
   return JSON.stringify({ name: 'pkg', dependencies: deps, scripts });
@@ -141,17 +142,15 @@ describe('ScaHook (T-M7-005)', () => {
 
   it('evaluateAndEscalate bumps RiskEscalationHook severity floor', () => {
     // Set up an escalation hook with a fake classifier that records
-    // the floor it was asked to enforce.
-    let enforced: { severity: string } | null = null;
-    const classifier = {
+    // the floor it was asked to enforce. The box object dodges TS's
+    // control-flow narrowing of `let` across closure boundaries.
+    const enforced: { value: { severity: string } | null } = { value: null };
+    const classifier: RiskClassifierLike = {
       enforceFloor(args: { deterministic: { severity: string } }) {
-        enforced = { severity: args.deterministic.severity };
+        enforced.value = { severity: args.deterministic.severity };
       },
     };
-    const escalationHook = new RiskEscalationHook(
-      new ProtectedFileDetector(),
-      classifier as unknown as Parameters<typeof RiskEscalationHook>[1],
-    );
+    const escalationHook = new RiskEscalationHook(new ProtectedFileDetector(), classifier);
     const scaHook = new ScaHook({ escalationHook });
 
     const r = scaHook.evaluateAndEscalate({
@@ -163,9 +162,9 @@ describe('ScaHook (T-M7-005)', () => {
     });
 
     expect(r.severityFloor).toBe('high');
-    expect(enforced).not.toBeNull();
+    expect(enforced.value).not.toBeNull();
     // Escalation hook bumps to ≥ high because of the SCA floor.
-    expect(['high', 'critical']).toContain(enforced?.severity);
+    expect(['high', 'critical']).toContain(enforced.value?.severity);
   });
 
   it('returns empty when no dependency files changed', () => {

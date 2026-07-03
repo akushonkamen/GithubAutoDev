@@ -12,9 +12,9 @@
 import { describe, expect, it } from 'vitest';
 import { renderPrBody, wrapPrBodyForLlm } from '../pr-body-renderer.js';
 import {
+  TraceabilityBlockError,
   containsArtifactUri,
   renderTraceabilityBlock,
-  TraceabilityBlockError,
 } from '../traceability-block.js';
 
 const sha = 'a'.repeat(64);
