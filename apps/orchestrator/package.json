@@ -19,6 +19,8 @@
     "@cgao/events": "workspace:*",
     "@cgao/github": "workspace:*",
     "@cgao/github-events": "workspace:*",
+    "@cgao/policy": "workspace:*",
+    "@cgao/runner-broker": "workspace:*",
     "@cgao/schemas": "workspace:*",
     "hono": "^4.6.0",
     "yaml": "^2.9.0",
