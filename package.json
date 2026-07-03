@@ -18,10 +18,13 @@
     "db:generate": "pnpm --filter @cgao/db run generate",
     "db:migrate": "pnpm --filter @cgao/db run migrate",
     "dev:up": "docker compose -f infra/docker-compose.yml up -d",
-    "dev:down": "docker compose -f infra/docker-compose.yml down"
+    "dev:down": "docker compose -f infra/docker-compose.yml down",
+    "commitlint": "commitlint --from=origin/main --to=HEAD"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@types/node": "^22.7.0",
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"

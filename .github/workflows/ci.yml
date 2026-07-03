@@ -41,3 +41,7 @@ jobs:
 
       - name: Test (vitest)
         run: pnpm test
+
+      - name: Commitlint (PR head commits)
+        if: github.event_name == 'pull_request'
+        run: pnpm commitlint
