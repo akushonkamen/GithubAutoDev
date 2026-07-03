@@ -26,6 +26,28 @@ const bus = new InMemoryEventBus();
 const dedup = new InMemoryDedupStore();
 const suppression = new InMemorySuppressionStore();
 
+/**
+ * Exported for tests / ops — gives direct access to the bus and stores
+ * so regression suites can record mutations, inspect published events,
+ * and assert DLQ routing without going through HTTP.
+ *
+ * `__reset()` clears all three stores' state. Tests MUST call this in
+ * `beforeEach` to keep the module-level singletons isolated from
+ * earlier test side effects (the InMemoryEventBus does not drain
+ * queued messages from prior tests on its own).
+ */
+export const __internals = {
+  bus,
+  dedup,
+  suppression,
+  __reset(): void {
+    (bus as unknown as { queues: Map<string, unknown[]> }).queues.clear();
+    (bus as unknown as { consumers: Map<string, unknown> }).consumers.clear();
+    (dedup as unknown as { records: Map<string, unknown> }).records.clear();
+    (suppression as unknown as { records: unknown[] }).records.length = 0;
+  },
+};
+
 const webhookDeps: WebhookDeps = {
   get secret() {
     return process.env.GITHUB_WEBHOOK_SECRET ?? 'dev-secret';

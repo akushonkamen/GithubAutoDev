@@ -221,7 +221,7 @@ docs/event-contract.md
 
 ## 5. M1：Webhook 与事件底座
 
-### [ ] T-M1-001 实现 GitHub webhook endpoint
+### [x] T-M1-001 实现 GitHub webhook endpoint
 
 Spec：第 12.1 节  
 优先级：P0  
@@ -244,7 +244,7 @@ raw payload artifact writer
 原始 payload 保存为 artifact
 ```
 
-### [ ] T-M1-002 实现 delivery deduplication
+### [x] T-M1-002 实现 delivery deduplication
 
 Spec：第 12.1、15 节  
 优先级：P0  
@@ -264,7 +264,7 @@ delivery idempotency middleware
 重复请求返回 200，不重复处理
 ```
 
-### [ ] T-M1-003 实现事件标准化
+### [x] T-M1-003 实现事件标准化
 
 Spec：第 10 节  
 优先级：P0  
@@ -284,7 +284,7 @@ issues.opened、issue_comment.created、pull_request.synchronize、workflow_run.
 映射事件包含 correlation_id、repo、run_id 或 run lookup key
 ```
 
-### [ ] T-M1-004 实现 origin suppression
+### [x] T-M1-004 实现 origin suppression
 
 Spec：第 12.1、14.2、15 节  
 优先级：P0  
@@ -306,7 +306,7 @@ CGAO 自己同步的 label 不直接触发状态迁移
 self-echo 事件被标记 observed
 ```
 
-### [ ] T-M1-005 实现事件总线发布与 DLQ
+### [x] T-M1-005 实现事件总线发布与 DLQ
 
 Spec：第 8、10 节  
 优先级：P0  
@@ -329,7 +329,7 @@ retry policy
 超过阈值进入 DLQ 并产生告警
 ```
 
-### [ ] T-M1-006 Webhook replay 与伪造测试
+### [x] T-M1-006 Webhook replay 与伪造测试
 
 Spec：第 6、12.1、21 节  
 优先级：P0  

@@ -10,9 +10,9 @@
  *   - self-echo from CGAO bot → observed topic, not the business topic
  */
 
-import { createHmac } from 'node:crypto';
+import { createHash, createHmac } from 'node:crypto';
 import { beforeEach, describe, expect, it } from 'vitest';
-import app from '../server.js';
+import app, { __internals } from '../server.js';
 
 const SECRET = 'correct horse battery staple';
 
@@ -46,6 +46,7 @@ async function postWebhook(opts: {
 describe('POST /github/webhook', () => {
   beforeEach(() => {
     process.env.GITHUB_WEBHOOK_SECRET = SECRET;
+    __internals.__reset();
   });
 
   it('rejects requests with no signature header (AUTH_SIGNATURE_INVALID)', async () => {
@@ -118,5 +119,90 @@ describe('POST /github/webhook', () => {
       body: {},
     });
     expect(res.status).toBe(202);
+  });
+
+  it('T-M1-002: 10 replays of the same delivery produce exactly 1 business event', async () => {
+    const delivery = '66666666-6666-6666-6666-666666666666';
+    const body = {
+      action: 'opened',
+      issue: {
+        number: 99,
+        title: 'replay test',
+        body: null,
+        html_url: 'https://github.com/cgao/test/issues/99',
+      },
+      repository: { name: 'test', full_name: 'cgao/test', owner: { login: 'cgao' } },
+    };
+    const accepted: string[] = [];
+    const deduped: string[] = [];
+    const unsubAccepted = __internals.bus.subscribe('webhook.github.issues.opened', (m) => {
+      accepted.push(m.id);
+    });
+    const unsubDedup = __internals.bus.subscribe('webhook.github.deduped', (m) => {
+      deduped.push(m.id);
+    });
+
+    try {
+      for (let i = 0; i < 10; i++) {
+        await postWebhook({ event: 'issues', delivery, body });
+      }
+    } finally {
+      unsubAccepted();
+      unsubDedup();
+    }
+    expect(accepted).toHaveLength(1);
+    expect(deduped).toHaveLength(9);
+  });
+
+  it('T-M1-004/006: self-echo from CGAO bot routes to observed, not the business topic', async () => {
+    process.env.CGAO_BOT_LOGIN = 'cgao-bot[bot]';
+    const delivery = '77777777-7777-7777-7777-777777777777';
+    const issueBody = '["cgao:plan-ready"] <!-- cgao:status-comment-marker abc -->';
+    const webhookBody = {
+      action: 'created',
+      comment: {
+        id: 1,
+        body: issueBody,
+        user: { login: 'cgao-bot[bot]' },
+        html_url: 'https://github.com/cgao/test/issues/5#issuecomment-1',
+      },
+      issue: { number: 5, title: 't', body: null, html_url: 'https://github.com/cgao/test/issues/5' },
+      repository: { name: 'test', full_name: 'cgao/test', owner: { login: 'cgao' } },
+    };
+    const chash = createHash('sha256').update(JSON.stringify(webhookBody)).digest('hex');
+    // Record the mutation the CGAO bot just performed — this is what
+    // origin suppression will match against when the webhook echoes back.
+    await __internals.suppression.record({
+      actor: 'cgao-bot[bot]',
+      eventType: 'issue_comment.created',
+      subject: 'cgao/test#comment-1',
+      contentHash: chash,
+    });
+
+    const business: string[] = [];
+    const observed: string[] = [];
+    const unsubBiz = __internals.bus.subscribe(
+      'webhook.github.issue_comment.created',
+      (m) => {
+        business.push(m.id);
+      },
+    );
+    const unsubObs = __internals.bus.subscribe('webhook.github.observed', (m) => {
+      observed.push(m.id);
+    });
+
+    try {
+      const res = await postWebhook({
+        event: 'issue_comment',
+        delivery,
+        body: webhookBody,
+      });
+      expect(((await res.json()) as { kind: string }).kind).toBe('accepted');
+    } finally {
+      unsubBiz();
+      unsubObs();
+    }
+    expect(business).toHaveLength(0);
+    expect(observed).toHaveLength(1);
   });
 });
