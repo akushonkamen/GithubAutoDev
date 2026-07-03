@@ -1254,7 +1254,7 @@ allowed path 内脚本尝试修改 .github/workflows 被拒绝
 
 ## 10. M6：测试与修复循环
 
-### [ ] T-M6-001 实现 fast gate runner
+### [x] T-M6-001 实现 fast gate runner
 
 Spec：第 12.7 节  
 优先级：P0  
@@ -1276,7 +1276,7 @@ lint/typecheck/unit adapters
 日志写 artifact 并脱敏
 ```
 
-### [ ] T-M6-002 实现 failure fingerprint
+### [x] T-M6-002 实现 failure fingerprint
 
 Spec：第 12.7、20 节  
 优先级：P0  
@@ -1296,7 +1296,7 @@ FingerprintService
 fingerprint 写入 test-result artifact
 ```
 
-### [ ] T-M6-003 实现 UltraQA 风格修复循环
+### [x] T-M6-003 实现 UltraQA 风格修复循环
 
 Spec：第 12.7、23 节  
 优先级：P0  
@@ -1318,7 +1318,7 @@ FixAgentRun
 每轮产生独立 test-result 和 fix-result artifact
 ```
 
-### [ ] T-M6-004 实现 package script exfiltration 回归测试
+### [x] T-M6-004 实现 package script exfiltration 回归测试
 
 Spec：第 6、13.1、21 节  
 优先级：P0  
@@ -1340,7 +1340,7 @@ fixtures/malicious-package-json/
 日志脱敏后无 secret
 ```
 
-### [ ] T-M6-005 实现 verifier 基础验收
+### [x] T-M6-005 实现 verifier 基础验收
 
 Spec：第 12.7、12.9 节  
 优先级：P1  
