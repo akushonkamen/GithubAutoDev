@@ -132,10 +132,12 @@ function stableJsonStringify(value: unknown): string {
   return `{${pairs.join(',')}}`;
 }
 
+export type HandoffPayloadInput = z.input<typeof handoffPayloadSchema>;
+
 export interface BuildHandoffInput {
   runId: string;
   generation: number;
-  payload: HandoffPayload;
+  payload: HandoffPayloadInput;
   fromStage: string;
   toStage: string;
   upstreamRef: string;
@@ -220,7 +222,7 @@ export function readHandoff(args: {
   let handoff = args.handoff;
 
   if (
-    handoff.kind === 'dev_to_review' &&
+    handoff.payload.kind === 'dev_to_review' &&
     args.reader === 'reviewer' &&
     !args.allowExecutorNarrative
   ) {

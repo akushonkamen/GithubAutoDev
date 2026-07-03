@@ -19,6 +19,16 @@ import {
 
 const sha64 = (s: string) => s.padEnd(64, '0').slice(0, 64);
 
+function planToDevData(h: Handoff) {
+  if (h.payload.kind !== 'plan_to_dev') throw new Error(`expected plan_to_dev, got ${h.payload.kind}`);
+  return h.payload.data;
+}
+
+function devToReviewData(h: Handoff) {
+  if (h.payload.kind !== 'dev_to_review') throw new Error(`expected dev_to_review, got ${h.payload.kind}`);
+  return h.payload.data;
+}
+
 describe('buildHandoff — analysis→plan (T-M4-006, spec §12.4)', () => {
   it('produces a valid handoff with payload_sha + handoff_sha stamped', () => {
     const h = buildHandoff({
@@ -63,7 +73,7 @@ describe('buildHandoff — plan→dev (T-M4-006, spec §12.5)', () => {
         },
       },
     });
-    expect(h.payload.data.taskIds).toEqual(['t1', 't2']);
+    expect(planToDevData(h).taskIds).toEqual(['t1', 't2']);
     expect(h.toStage).toBe('dev');
   });
 });
@@ -93,13 +103,13 @@ describe('buildHandoff — dev→review (T-M4-006, spec §12.6)', () => {
 
   it('stamps the executor narrative so an auditor can see it later', () => {
     const h = mkDevToReview('I chose option A because B was too slow.');
-    expect(h.payload.data.executorNarrative).toContain('option A');
+    expect(devToReviewData(h).executorNarrative).toContain('option A');
   });
 
   it('readHandoff: reviewer does NOT see executorNarrative by default', () => {
     const h = mkDevToReview('defend-my-choice');
     const result = readHandoff({ handoff: h, reader: 'reviewer' });
-    expect(result.handoff.payload.data.executorNarrative).toBe('[redacted]');
+    expect(devToReviewData(result.handoff).executorNarrative).toBe('[redacted]');
     expect(result.redactions.length).toBe(1);
     expect(result.redactions[0]?.path).toBe('payload.data.executorNarrative');
   });
@@ -107,11 +117,11 @@ describe('buildHandoff — dev→review (T-M4-006, spec §12.6)', () => {
   it('readHandoff: planner/dev see the full narrative', () => {
     const h = mkDevToReview('defend-my-choice');
     expect(
-      readHandoff({ handoff: h, reader: 'planner' }).handoff.payload.data.executorNarrative,
+      devToReviewData(readHandoff({ handoff: h, reader: 'planner' }).handoff).executorNarrative,
     ).toBe('defend-my-choice');
-    expect(readHandoff({ handoff: h, reader: 'dev' }).handoff.payload.data.executorNarrative).toBe(
-      'defend-my-choice',
-    );
+    expect(
+      devToReviewData(readHandoff({ handoff: h, reader: 'dev' }).handoff).executorNarrative,
+    ).toBe('defend-my-choice');
   });
 
   it('readHandoff: reviewer with allowExecutorNarrative sees the narrative', () => {
@@ -122,7 +132,7 @@ describe('buildHandoff — dev→review (T-M4-006, spec §12.6)', () => {
       allowExecutorNarrative: true,
     });
     expect(result.redactions).toEqual([]);
-    expect(result.handoff.payload.data.executorNarrative).toBe('defend-my-choice');
+    expect(devToReviewData(result.handoff).executorNarrative).toBe('defend-my-choice');
   });
 
   it('readHandoff: empty narrative produces no redaction record', () => {
@@ -169,8 +179,12 @@ describe('verifyHandoffPayloadSha (T-M4-006, spec §5)', () => {
     const tampered: Handoff = {
       ...h,
       payload: {
-        ...h.payload,
-        data: { ...h.payload.data, summary: 'tampered' },
+        kind: 'analysis_to_plan',
+        data: {
+          requirementSpecDigest: sha64('a'),
+          openQuestions: [],
+          summary: 'tampered',
+        },
       },
     };
     expect(verifyHandoffPayloadSha(tampered)).toBe(false);

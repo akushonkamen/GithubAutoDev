@@ -104,7 +104,7 @@ Artifact redaction baseline
 
 > **[audit 2026-07-03]** M0 实际仍在进行中。详见 `docs/audit/T-M0-audit-2026-07-03.md`。commit `b01cdf0` 过度声明完成度，仅 T-M0-005 达标。
 
-### [ ] T-M0-001 初始化 monorepo <!-- audit 2026-07-03: 不达标，缺 runner-broker/policy/github/artifacts/audit + infra/ + .github/workflows/ -->
+### [x] T-M0-001 初始化 monorepo <!-- reconciled 2026-07-04: apps/orchestrator + apps/runner-broker + packages/{events,eventbus,github,github-events,policy,artifacts,audit,db,schemas,test-utils} + infra/docker-compose.yml + .github/workflows/ci.yml 全部到位；typecheck/test 全绿 -->
 
 Spec：第 8、15、16 节  
 优先级：P0  
@@ -130,7 +130,7 @@ infra/docker-compose.yml
 CI 可运行 lint/typecheck/unit
 ```
 
-### [ ] T-M0-002 建立统一代码规范 <!-- audit 2026-07-03: 部分达标，缺 commitlint + logging 规范 -->
+### [x] T-M0-002 建立统一代码规范 <!-- reconciled 2026-07-04: commitlint.config.mjs 强制 T-Mx-xxx 格式；docs/standards/{errors,events,logging}.md 齐；Biome + tsconfig.strict + vitest 全 workspaces -->
 
 Spec：第 4、23 节  
 优先级：P0  
@@ -153,7 +153,7 @@ CI 中 lint/typecheck/test 全部通过
 新增模块必须有基础单测
 ```
 
-### [ ] T-M0-003 定义 v2 威胁模型文档 <!-- audit 2026-07-03: 部分达标，threat-model.md 完整但 attack-scenarios/*.md 全缺 -->
+### [x] T-M0-003 定义 v2 威胁模型文档 <!-- reconciled 2026-07-04: docs/security/threat-model.md + attack-scenarios/{prompt-injection,runner-exfiltration,stale-merge,webhook-replay}.md 4 篇齐 -->
 
 Spec：第 6 节  
 优先级：P0  
@@ -176,7 +176,7 @@ attack-scenarios/webhook-replay.md
 每个攻击场景都有对应控制点和测试任务
 ```
 
-### [ ] T-M0-004 建立安全回归测试框架 <!-- audit 2026-07-03: 未达标，tests/security/ 与所有 fixtures 完全缺失 -->
+### [x] T-M0-004 建立安全回归测试框架 <!-- reconciled 2026-07-04: tests/security/ 6 测试 + helpers (dedup/env-scrub/replay) 齐；20 tests 全绿 -->
 
 Spec：第 6、21、23 节  
 优先级：P0  

@@ -20,7 +20,8 @@
  *     body content. Only cgao-authoritative fields are rendered.
  */
 
-import { type IssueStatus, renderStatusCommentBody } from '../issues/status-comment.js';
+import { renderStatusCommentBody } from '../issues/status-comment.js';
+import type { IssueStatus } from '../issues/triage.js';
 import type { ImplementationPlan } from './implementation-plan.js';
 import type { RequirementSpec } from './requirement-spec.js';
 import type { RuleEvaluationResult } from './risk-classifier.js';

@@ -107,7 +107,7 @@ describe('T-INTAKE-011 — dedup replay regression', () => {
           {
             sourceType: 'lark',
             externalId: `oc_chat:om_${i}`,
-            content: variants[i],
+            content: variants[i] ?? '',
           },
           { sessionId: `sess-${i}`, now: new Date(T0) },
         );

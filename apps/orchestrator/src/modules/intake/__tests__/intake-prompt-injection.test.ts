@@ -175,7 +175,7 @@ describe('T-INTAKE-010 — intake prompt-injection regression', () => {
       let s: IntakeSession = freshSession({ id: 'sess-1' });
       s = advance(s, { message: '@cgao deploy broken', confidence: 0.5 }, config).session;
       expect(s.state === 'confirming' || s.state === 'ready').toBe(true);
-      s = advance(s, { message: 'cancel', userAbandoned: true }, config).session;
+      s = advance(s, { message: 'cancel', confidence: 0, userAbandoned: true }, config).session;
       expect(s.state).toBe('dropped');
       expect(s.dropReason).toBe('user_abandoned');
     });
