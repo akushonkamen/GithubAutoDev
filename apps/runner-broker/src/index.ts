@@ -118,3 +118,20 @@ export { FingerprintService, normalizeFilePath } from './gate/fingerprint.js';
 export type { Fingerprint, FingerprintInput } from './gate/fingerprint.js';
 export { normalizeMessage, parseFailures } from './gate/failure-parser.js';
 export type { FailureSpan } from './gate/failure-parser.js';
+
+// T-M6-003 test/fix loop
+export {
+  MAX_ROUNDS,
+  SAME_FINGERPRINT_LIMIT,
+  TestFixLoopController,
+} from './gate/test-fix-loop.js';
+export type {
+  FixResultArtifact,
+  FixResultArtifactBody,
+  GateRunnerPort,
+  RoundRecord,
+  TestFixLoopInput,
+  TestFixLoopResult,
+  TestFixLoopState,
+  WrapUntrustedFn,
+} from './gate/test-fix-loop.js';
