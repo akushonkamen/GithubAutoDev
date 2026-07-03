@@ -29,12 +29,27 @@ importers:
 
   apps/orchestrator:
     dependencies:
+      '@cgao/artifacts':
+        specifier: workspace:*
+        version: link:../../packages/artifacts
+      '@cgao/audit':
+        specifier: workspace:*
+        version: link:../../packages/audit
       '@cgao/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@cgao/eventbus':
+        specifier: workspace:*
+        version: link:../../packages/eventbus
       '@cgao/events':
         specifier: workspace:*
         version: link:../../packages/events
+      '@cgao/github':
+        specifier: workspace:*
+        version: link:../../packages/github
+      '@cgao/github-events':
+        specifier: workspace:*
+        version: link:../../packages/github-events
       '@cgao/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
@@ -89,6 +104,15 @@ importers:
         specifier: ^0.36.0
         version: 0.36.4
 
+  packages/eventbus:
+    dependencies:
+      '@cgao/schemas':
+        specifier: workspace:*
+        version: link:../schemas
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+
   packages/events:
     dependencies:
       zod:
@@ -97,6 +121,15 @@ importers:
 
   packages/github:
     dependencies:
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+
+  packages/github-events:
+    dependencies:
+      '@cgao/schemas':
+        specifier: workspace:*
+        version: link:../schemas
       zod:
         specifier: ^3.23.0
         version: 3.25.76

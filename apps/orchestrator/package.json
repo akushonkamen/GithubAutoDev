@@ -9,11 +9,16 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run"
   },
   "dependencies": {
+    "@cgao/artifacts": "workspace:*",
+    "@cgao/audit": "workspace:*",
     "@cgao/db": "workspace:*",
+    "@cgao/eventbus": "workspace:*",
     "@cgao/events": "workspace:*",
+    "@cgao/github": "workspace:*",
+    "@cgao/github-events": "workspace:*",
     "@cgao/schemas": "workspace:*",
     "hono": "^4.6.0",
     "zod": "^3.23.0"
