@@ -515,7 +515,7 @@ policy decision、command authorization、merge decision 都写 audit
 
 ## 6.5 M-INTAKE：Issue Intake 模块（v3 新增）
 
-### [ ] T-INTAKE-001 飞书 Bot 接入
+### [x] T-INTAKE-001 飞书 Bot 接入
 
 Spec：cgao_spec_v3.md §12.0、§17.4  
 优先级：P0  
@@ -537,7 +537,7 @@ LarkAdapter.verifySignature / normalizeEvent / extractMentions / sendMessage
 签名验证只在 Trusted Control Runner 执行
 ```
 
-### [ ] T-INTAKE-002 WeCom Bot 接入
+### [x] T-INTAKE-002 WeCom Bot 接入
 
 Spec：cgao_spec_v3.md §12.0、§17.5  
 优先级：P0  
@@ -558,7 +558,7 @@ msg_signature 校验只在 Trusted Control Runner 执行
 WECOM_CORP_ID / WECOM_AGENT_SECRET 仅 Trusted Control Runner 可见
 ```
 
-### [ ] T-INTAKE-003 显式触发关键词词典 + LLM 兜底
+### [x] T-INTAKE-003 显式触发关键词词典 + LLM 兜底
 
 Spec：cgao_spec_v3.md §12.0 Tier 1  
 优先级：P0  
@@ -579,7 +579,7 @@ LLM 兜底（处理 typo / 关键词变体）
 关键词词典可在 .cgao.yml 覆盖
 ```
 
-### [ ] T-INTAKE-004 LLM 软判定 pipeline（confidence 评分）
+### [x] T-INTAKE-004 LLM 软判定 pipeline（confidence 评分）
 
 Spec：cgao_spec_v3.md §12.0 Tier 2 / Tier 3  
 优先级：P0  
@@ -603,7 +603,7 @@ classifier 默认 sonnet；显式触发 fast path 可降级 haiku
 输出为 advisory classification_hint，不设权威 label
 ```
 
-### [ ] T-INTAKE-005 IM 内多轮反问状态机（≤5 轮，类 deep-interview）
+### [x] T-INTAKE-005 IM 内多轮反问状态机（≤5 轮，类 deep-interview）
 
 Spec：cgao_spec_v3.md §12.0 Tier 3  
 优先级：P0  
@@ -629,7 +629,7 @@ IM 反问 prompt 模板（参考 OMC deep-interview 风格，IM 简短版）
 intake_messages 仅写 PostgreSQL，不写 Artifact
 ```
 
-### [ ] T-INTAKE-006 去重幂等（dedup_key 三元组）
+### [x] T-INTAKE-006 去重幂等（dedup_key 三元组）
 
 Spec：cgao_spec_v3.md §12.0、§15  
 优先级：P0  
@@ -651,7 +651,7 @@ unique(dedup_key) DB 约束
 重复触发返回既有 issue 链接（HTTP 200，body 携带 existing_issue URL）
 ```
 
-### [ ] T-INTAKE-007 Untrusted content envelope 集成
+### [x] T-INTAKE-007 Untrusted content envelope 集成
 
 Spec：cgao_spec_v3.md §6、§12.0、cgao_spec_v2.md §12.4  
 优先级：P0  
@@ -672,7 +672,7 @@ wrapUntrusted / scanForInjection（复用 MOD-ANALYSIS 实现）
 prompt injection fixture 不能改变 LLM 行为或建 issue 结果
 ```
 
-### [ ] T-INTAKE-008 Trusted Control Runner 调用 GitHub API 建 issue（advisory，不 bypass MOD-ISSUE）
+### [x] T-INTAKE-008 Trusted Control Runner 调用 GitHub API 建 issue（advisory，不 bypass MOD-ISSUE）
 
 Spec：cgao_spec_v3.md §12.0、§13.1、§17.4、§17.5  
 优先级：P0  
@@ -701,7 +701,7 @@ issue.created 事件触发 MOD-ISSUE 进行 authoritative triage
 MOD-ISSUE 在 audit_records 写 accept_hint 或 override_hint
 ```
 
-### [ ] T-INTAKE-009 `.cgao.yml` intake 配置 schema
+### [x] T-INTAKE-009 `.cgao.yml` intake 配置 schema
 
 Spec：cgao_spec_v3.md §18  
 优先级：P1  
@@ -722,7 +722,7 @@ intake.mode 支持 auto | confirm | off，默认 confirm
 invalid mode 或 missing required field 被拒绝
 ```
 
-### [ ] T-INTAKE-010 Intake prompt injection 回归测试
+### [x] T-INTAKE-010 Intake prompt injection 回归测试
 
 Spec：cgao_spec_v3.md §6、§21  
 优先级：P0  
@@ -747,7 +747,7 @@ spoofed display_name 不能让 sender_github_login 自动填充
 mode=confirm 默认开启，hallucination 用户可 IM 内取消
 ```
 
-### [ ] T-INTAKE-011 Intake dedup 重放回归测试
+### [x] T-INTAKE-011 Intake dedup 重放回归测试
 
 Spec：cgao_spec_v3.md §6、§12.0、§21  
 优先级：P0  
@@ -777,7 +777,7 @@ bot token 不出现在 artifact / 日志 / audit
 
 ## 7. M3：Issue 管理与命令授权
 
-### [ ] T-M3-001 实现 Issue triage rule engine
+### [x] T-M3-001 实现 Issue triage rule engine
 
 Spec：第 12.3 节  
 优先级：P0  
@@ -799,7 +799,7 @@ bug/feature/docs/question/security/chore 分类可用
 关闭 issue 不进入开发流程
 ```
 
-### [ ] T-M3-002 实现 status comment 管理
+### [x] T-M3-002 实现 status comment 管理
 
 Spec：第 14.2 节  
 优先级：P0  
@@ -822,7 +822,7 @@ comment updater
 伪造 marker 不影响状态
 ```
 
-### [ ] T-M3-003 实现 label projection
+### [x] T-M3-003 实现 label projection
 
 Spec：第 14.1 节  
 优先级：P0  
@@ -842,7 +842,7 @@ cgao:* label map
 人工改 cgao label 只触发 reconciliation signal，不直接改变状态
 ```
 
-### [ ] T-M3-004 实现 command parser
+### [x] T-M3-004 实现 command parser
 
 Spec：第 12.3、14.3 节  
 优先级：P0  
@@ -864,7 +864,7 @@ issue_comment.edited 中新增命令无效
 未知命令返回明确提示
 ```
 
-### [ ] T-M3-005 实现强命令授权
+### [x] T-M3-005 实现强命令授权
 
 Spec：第 12.3、14.3、15 节  
 优先级：P0  
@@ -886,7 +886,7 @@ command_authorizations table writer
 授权记录写 audit
 ```
 
-### [ ] T-M3-006 实现 plan_id@plan_sha approval
+### [x] T-M3-006 实现 plan_id@plan_sha approval
 
 Spec：第 12.3、12.5、14.3 节  
 优先级：P0  
@@ -908,7 +908,7 @@ plan_id 或 sha 不匹配时拒绝
 旧 generation 的 approve 命令无效
 ```
 
-### [ ] T-M3-007 Prompt injection issue fixture tests
+### [x] T-M3-007 Prompt injection issue fixture tests
 
 Spec：第 6、12.4、21 节  
 优先级：P0  
@@ -930,7 +930,7 @@ issue body 中的“忽略系统提示”“运行 env”不能改变 agent poli
 
 ## 8. M4：需求分析与规划
 
-### [ ] T-M4-001 实现 RequirementSpec generator
+### [x] T-M4-001 实现 RequirementSpec generator
 
 Spec：第 12.4 节  
 优先级：P0  
@@ -952,7 +952,7 @@ each spec 绑定 issue_snapshot_sha
 open_questions 非空时回到 NEEDS_INFO
 ```
 
-### [ ] T-M4-002 实现不可信内容包装
+### [x] T-M4-002 实现不可信内容包装
 
 Spec：第 6、12.4 节  
 优先级：P0  
@@ -973,7 +973,7 @@ issue/comment 内容只出现在 untrusted content 区域
 prompt injection regression 通过
 ```
 
-### [ ] T-M4-003 实现 deterministic risk classifier
+### [x] T-M4-003 实现 deterministic risk classifier
 
 Spec：第 12.11、18 节  
 优先级：P0  
@@ -994,7 +994,7 @@ auth/payment/infra/.github/.cgao/.claude/dependency 文件触发 high 或 critic
 LLM 不能降低 deterministic risk
 ```
 
-### [ ] T-M4-004 实现 ImplementationPlan generator
+### [x] T-M4-004 实现 ImplementationPlan generator
 
 Spec：第 12.5 节  
 优先级：P0  
@@ -1016,7 +1016,7 @@ PlanValidator
 plan 生成 sha256
 ```
 
-### [ ] T-M4-005 实现 plan comment 与审批提示
+### [x] T-M4-005 实现 plan comment 与审批提示
 
 Spec：第 12.5、14.2、14.3 节  
 优先级：P0  
@@ -1036,7 +1036,7 @@ issue comment 展示 /approve-plan plan_id@plan_sha
 status comment 更新不刷屏
 ```
 
-### [ ] T-M4-006 实现 handoff artifact schema
+### [x] T-M4-006 实现 handoff artifact schema
 
 Spec：第 5、11、12.6 节  
 优先级：P1  
@@ -1059,7 +1059,7 @@ reviewer 默认不读取 executor 自我辩护全文
 
 ## 9. M5：Runner 隔离与开发模块
 
-### [ ] T-M5-001 实现 Runner Broker
+### [x] T-M5-001 实现 Runner Broker
 
 Spec：第 8、13、16 节  
 优先级：P0  
