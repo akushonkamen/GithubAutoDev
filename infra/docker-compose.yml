@@ -1,0 +1,76 @@
+# CGAO local development infrastructure.
+#
+# Brings up the backing services the orchestrator + runner-broker depend on:
+#   - postgres: authoritative state store (spec §15)
+#   - nats:     event bus (spec §8, §10)
+#   - redis:    DLQ + rate-limit counters (spec §10 §18)
+#   - minio:    S3-compatible artifact mock (spec §15)
+#
+# Usage:  pnpm dlx pnpm-dev-up  OR  docker compose -f infra/docker-compose.yml up -d
+#
+# Service ports are pinned to the CGAO defaults so .env defaults work out
+# of the box. Override via .env.local if you need to relocate.
+
+services:
+  postgres:
+    image: postgres:16.4-alpine
+    container_name: cgao-postgres
+    environment:
+      POSTGRES_USER: cgao
+      POSTGRES_PASSWORD: cgao_dev
+      POSTGRES_DB: cgao
+    ports:
+      - "5432:5432"
+    volumes:
+      - cgao-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cgao -d cgao"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  nats:
+    image: nats:2.10-alpine
+    container_name: cgao-nats
+    command: ["-js", "-m", "8222"]   # JetStream enabled, monitoring on 8222
+    ports:
+      - "4222:4222"   # NATS client
+      - "8222:8222"   # monitoring
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8222/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: cgao-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:RELEASE.2024-10-13T13-34-11Z
+    container_name: cgao-minio
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: cgao
+      MINIO_ROOT_PASSWORD: cgao_dev_secret
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # web console
+    volumes:
+      - cgao-minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  cgao-postgres-data:
+  cgao-minio-data:

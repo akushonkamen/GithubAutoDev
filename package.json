@@ -16,7 +16,9 @@
     "format": "biome format --write .",
     "typecheck": "pnpm -r --filter=./apps/* --filter=./packages/* run typecheck",
     "db:generate": "pnpm --filter @cgao/db run generate",
-    "db:migrate": "pnpm --filter @cgao/db run migrate"
+    "db:migrate": "pnpm --filter @cgao/db run migrate",
+    "dev:up": "docker compose -f infra/docker-compose.yml up -d",
+    "dev:down": "docker compose -f infra/docker-compose.yml down"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
