@@ -23,3 +23,12 @@ export {
   workflowRunCompletedSchema,
   issuesLabeledSchema,
 } from './schemas.js';
+export {
+  type IssueSnapshot,
+  type IssueSnapshotInput,
+  type MaterialChangeResult,
+  canonicalIssueBody,
+  detectMaterialChange,
+  isStale,
+  snapshotIssue,
+} from './snapshot.js';
