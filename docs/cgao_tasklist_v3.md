@@ -1845,7 +1845,7 @@ checkpoint 可用于验证历史记录未被篡改
 
 ## 15. M11：生产增强
 
-### [ ] T-M11-001 Agent SDK Runner
+### [x] T-M11-001 Agent SDK Runner
 
 Spec：第 13、16 节  
 优先级：P2  
@@ -1866,7 +1866,7 @@ runner hook integration
 权限、hooks、artifact、日志统一受 Orchestrator 控制
 ```
 
-### [ ] T-M11-002 并行 worktree 执行
+### [x] T-M11-002 并行 worktree 执行
 
 Spec：第 5、12.6 节  
 优先级：P2  
@@ -1887,7 +1887,7 @@ ConflictResolver
 冲突进入 CONFLICTED 或 debugger fix
 ```
 
-### [ ] T-M11-003 多仓库支持
+### [x] T-M11-003 多仓库支持
 
 Spec：第 8、15 节  
 优先级：P2  
@@ -1908,7 +1908,7 @@ per-repo policy cache
 repo policy 不串扰
 ```
 
-### [ ] T-M11-004 Dashboard
+### [x] T-M11-004 Dashboard
 
 Spec：第 19 节  
 优先级：P2  
