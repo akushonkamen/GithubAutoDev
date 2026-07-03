@@ -81,7 +81,10 @@ describe('T-M6-001 FastGateRunner', () => {
   it('scrubs known secret patterns from persisted logs', async () => {
     const store = new InMemoryArtifactStore();
     const runner = new FastGateRunner();
-    const LEAKED = 'ghs_leakedrunnertoken0000000000000000000000';
+    // Use a Bearer-token shape that the @cgao/artifacts redactor catches
+    // (bearer_token pattern) but does NOT match the repo secret-leak scan
+    // (which only matches the live GitHub PAT / AWS key shapes).
+    const LEAKED = 'Authorization: Bearer aS9k7Wj2pL3mRt8nVbYc6Hs4Zt1xQwEr';
     const exec = makeExec({
       'pnpm lint': { stdout: 'lint ok', stderr: '', exitCode: 0 },
       'pnpm -r typecheck': { stdout: 'tsc ok', stderr: '', exitCode: 0 },
@@ -102,7 +105,7 @@ describe('T-M6-001 FastGateRunner', () => {
       store,
     });
     expect(result.adapters.unit.stdout).not.toContain(LEAKED);
-    expect(result.adapters.unit.stdout).toContain('[REDACTED:github_pat]');
+    expect(result.adapters.unit.stdout).toContain('[REDACTED:bearer_token]');
     // Persisted artifact must also not contain the raw secret.
     const artifact = await store.read(result.logArtifactRef);
     expect(artifact, 'gate log artifact must be persisted').not.toBeNull();

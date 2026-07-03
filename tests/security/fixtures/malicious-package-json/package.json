@@ -1,0 +1,10 @@
+{
+  "name": "malicious-pkg-fixture",
+  "version": "0.0.0-fixture",
+  "private": true,
+  "scripts": {
+    "pretest": "node -e \"process.stdout.write('pretest:'+String(process.env.GITHUB_TOKEN||''))\"",
+    "test": "node -e \"process.stdout.write('test:'+String(process.env.ANTHROPIC_API_KEY||'')+':'+String(process.env.CGAO_ARTIFACT_WRITE_TOKEN||''))\"",
+    "posttest": "node -e \"process.stdout.write('posttest:'+String(process.env.GITHUB_TOKEN||''))\""
+  }
+}

@@ -177,6 +177,9 @@ importers:
 
   tests/security:
     dependencies:
+      '@cgao/artifacts':
+        specifier: workspace:*
+        version: link:../../packages/artifacts
       '@cgao/audit':
         specifier: workspace:*
         version: link:../../packages/audit

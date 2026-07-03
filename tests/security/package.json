@@ -9,6 +9,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@cgao/artifacts": "workspace:*",
     "@cgao/audit": "workspace:*",
     "@cgao/github": "workspace:*",
     "@cgao/policy": "workspace:*",

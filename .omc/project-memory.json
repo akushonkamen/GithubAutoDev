@@ -101,6 +101,12 @@
       "type": "file"
     },
     {
+      "path": "tests/security/src/__tests__/secret-leak-scan.test.ts",
+      "accessCount": 7,
+      "lastAccessed": 1783098061210,
+      "type": "file"
+    },
+    {
       "path": "commitlint.config.mjs",
       "accessCount": 6,
       "lastAccessed": 1783045337868,
@@ -110,12 +116,6 @@
       "path": "package.json",
       "accessCount": 6,
       "lastAccessed": 1783046073498,
-      "type": "file"
-    },
-    {
-      "path": "tests/security/src/__tests__/secret-leak-scan.test.ts",
-      "accessCount": 6,
-      "lastAccessed": 1783081934375,
       "type": "file"
     },
     {
@@ -140,6 +140,12 @@
       "path": "apps/runner-broker/package.json",
       "accessCount": 3,
       "lastAccessed": 1783097326641,
+      "type": "file"
+    },
+    {
+      "path": "tests/security/package.json",
+      "accessCount": 3,
+      "lastAccessed": 1783098033625,
       "type": "file"
     },
     {
@@ -350,12 +356,6 @@
       "path": "attack-scenarios/webhook-replay.md",
       "accessCount": 1,
       "lastAccessed": 1783045529942,
-      "type": "file"
-    },
-    {
-      "path": "tests/security/package.json",
-      "accessCount": 1,
-      "lastAccessed": 1783045773676,
       "type": "file"
     },
     {
