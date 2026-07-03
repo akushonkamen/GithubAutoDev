@@ -352,7 +352,7 @@ tests/security/forged-marker.test.ts
 
 ## 6. M2：状态机、Artifact 与 hash 绑定
 
-### [ ] T-M2-001 实现 PostgreSQL schema
+### [x] T-M2-001 实现 PostgreSQL schema
 
 Spec：第 15 节  
 优先级：P0  
@@ -381,7 +381,7 @@ migration 可重复执行
 核心表存在唯一索引和外键
 ```
 
-### [ ] T-M2-002 实现 workflow run 创建与锁
+### [x] T-M2-002 实现 workflow run 创建与锁
 
 Spec：第 9、15 节  
 优先级：P0  
@@ -402,7 +402,7 @@ optimistic version update
 并发事件不会造成状态回退或重复 PR 创建
 ```
 
-### [ ] T-M2-003 实现 generation 与 material change 判断
+### [x] T-M2-003 实现 generation 与 material change 判断
 
 Spec：第 9.4、9.5 节  
 优先级：P0  
@@ -425,7 +425,7 @@ issue body/title 关键变化会生成新 generation
 非关键 label 投影变化不增加 generation
 ```
 
-### [ ] T-M2-004 实现 Artifact Store abstraction
+### [x] T-M2-004 实现 Artifact Store abstraction
 
 Spec：第 11、15 节  
 优先级：P0  
@@ -448,7 +448,7 @@ Artifact 不可变
 Artifact metadata 写入 DB
 ```
 
-### [ ] T-M2-005 实现 artifact redaction baseline
+### [x] T-M2-005 实现 artifact redaction baseline
 
 Spec：第 11、20 节  
 优先级：P0  
@@ -470,7 +470,7 @@ classification policy
 security_sensitive artifact 不会被写入 GitHub comment
 ```
 
-### [ ] T-M2-006 实现 spec/plan/approval/test/review/merge hash 绑定
+### [x] T-M2-006 实现 spec/plan/approval/test/review/merge hash 绑定
 
 Spec：第 4.5、9.5、10、15 节  
 优先级：P0  
@@ -492,7 +492,7 @@ issue material change 后旧事件自动 stale
 PR synchronize 后旧 test/review/approval 失效
 ```
 
-### [ ] T-M2-007 实现 audit hash chain
+### [x] T-M2-007 实现 audit hash chain
 
 Spec：第 19 节  
 优先级：P1  
