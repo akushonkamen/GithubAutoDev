@@ -1362,7 +1362,7 @@ PR body checkbox 不作为 gate 证据
 
 ## 11. M7：Commit 与 PR
 
-### [ ] T-M7-001 实现工作分支创建
+### [x] T-M7-001 实现工作分支创建
 
 Spec：第 12.8 节  
 优先级：P0  
@@ -1382,7 +1382,7 @@ branch naming policy
 重复执行不会创建多条同义分支
 ```
 
-### [ ] T-M7-002 实现 commit 生成
+### [x] T-M7-002 实现 commit 生成
 
 Spec：第 12.8 节  
 优先级：P0  
@@ -1402,7 +1402,7 @@ commit message 包含 issue、run_id、spec_id、plan_id
 commit 前执行 protected file policy
 ```
 
-### [ ] T-M7-003 实现 PR 创建与去重
+### [x] T-M7-003 实现 PR 创建与去重
 
 Spec：第 12.8、15 节  
 优先级：P0  
@@ -1423,7 +1423,7 @@ PR marker
 PR number 写入 workflow_runs
 ```
 
-### [ ] T-M7-004 实现 PR body traceability
+### [x] T-M7-004 实现 PR body traceability
 
 Spec：第 12.8、14.2 节  
 优先级：P0  
@@ -1443,7 +1443,7 @@ PR body 展示 issue、run_id、spec_id、plan_id、head_sha、测试摘要
 PR body 不暴露内部 artifact URI
 ```
 
-### [ ] T-M7-005 实现 dependency change policy
+### [x] T-M7-005 实现 dependency change policy
 
 Spec：第 12.11、18 节  
 优先级：P1  
@@ -1464,7 +1464,7 @@ manifest/lockfile 变更自动 high risk
 新增 preinstall/postinstall script 标记 critical
 ```
 
-### [ ] T-M7-006 实现 PR duplicate/race 回归测试
+### [x] T-M7-006 实现 PR duplicate/race 回归测试
 
 Spec：第 4.3、4.4、15 节  
 优先级：P0  
