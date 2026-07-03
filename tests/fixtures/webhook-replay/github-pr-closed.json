@@ -1,0 +1,14 @@
+{
+  "action": "closed",
+  "number": 42,
+  "pull_request": {
+    "number": 42,
+    "head": { "sha": "abc1230000000000000000000000000000000000" },
+    "base": { "sha": "def4560000000000000000000000000000000000" }
+  },
+  "repository": {
+    "name": "test",
+    "full_name": "cgao/test",
+    "owner": { "login": "cgao" }
+  }
+}

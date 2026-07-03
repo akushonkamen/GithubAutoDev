@@ -118,6 +118,27 @@ importers:
 
   packages/test-utils: {}
 
+  tests/security:
+    dependencies:
+      '@cgao/audit':
+        specifier: workspace:*
+        version: link:../../packages/audit
+      '@cgao/github':
+        specifier: workspace:*
+        version: link:../../packages/github
+      '@cgao/policy':
+        specifier: workspace:*
+        version: link:../../packages/policy
+      '@cgao/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
+      '@cgao/test-utils':
+        specifier: workspace:*
+        version: link:../../packages/test-utils
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+
 packages:
 
   '@babel/code-frame@7.29.7':

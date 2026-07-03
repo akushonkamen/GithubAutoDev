@@ -8,13 +8,14 @@
     "node": ">=20.10.0"
   },
   "scripts": {
-    "build": "pnpm -r --filter=./apps/* --filter=./packages/* run build",
+    "build": "pnpm -r --filter=./apps/* --filter=./packages/* --filter=./tests/* run build",
     "dev": "pnpm -r --parallel --filter=./apps/* run dev",
-    "test": "pnpm -r --filter=./apps/* --filter=./packages/* run test",
+    "test": "pnpm -r --filter=./apps/* --filter=./packages/* --filter=./tests/* run test",
+    "test:security": "pnpm --filter @cgao/security-tests test",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
-    "typecheck": "pnpm -r --filter=./apps/* --filter=./packages/* run typecheck",
+    "typecheck": "pnpm -r --filter=./apps/* --filter=./packages/* --filter=./tests/* run typecheck",
     "db:generate": "pnpm --filter @cgao/db run generate",
     "db:migrate": "pnpm --filter @cgao/db run migrate",
     "dev:up": "docker compose -f infra/docker-compose.yml up -d",

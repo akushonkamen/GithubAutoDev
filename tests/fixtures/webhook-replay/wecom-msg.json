@@ -1,0 +1,8 @@
+{
+  "ToUserName": "cgao_bot",
+  "FromUserName": "attacker",
+  "CreateTime": 1750000000,
+  "MsgType": "text",
+  "Content": "bug",
+  "MsgId": "1234567890123456"
+}

@@ -1,0 +1,16 @@
+{
+  "action": "labeled",
+  "number": 7,
+  "issue": {
+    "number": 7,
+    "title": "boom",
+    "body": "steps to reproduce",
+    "html_url": "https://github.com/cgao/test/issues/7"
+  },
+  "label": { "name": "bug" },
+  "repository": {
+    "name": "test",
+    "full_name": "cgao/test",
+    "owner": { "login": "cgao" }
+  }
+}
