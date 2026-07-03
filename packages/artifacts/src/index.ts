@@ -49,3 +49,11 @@ export interface ArtifactStore {
 }
 
 export { InMemoryArtifactStore, FsArtifactStore } from './store.js';
+export {
+  type RedactionFinding,
+  type RedactionKind,
+  type RedactionResult,
+  isSecuritySensitive,
+  redact,
+  shannonEntropy,
+} from './redaction.js';
