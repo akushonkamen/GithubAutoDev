@@ -8,3 +8,4 @@
  */
 
 export * from './schema/index.js';
+export * from './repos/index.js';
