@@ -57,3 +57,21 @@ export {
   redact,
   shannonEntropy,
 } from './redaction.js';
+export {
+  type AccessTier,
+  type ArtifactClassifier,
+  type AccessDecision,
+  type Principal,
+  ArtifactAccessPolicy,
+  DEFAULT_CLASSIFIER,
+  tierRank,
+} from './access-policy.js';
+export {
+  type ExpiredArtifact,
+  type ExpirySink,
+  type RetentionPolicy,
+  type RetentionTickInput,
+  type RetentionTickResult,
+  DEFAULT_RETENTION_POLICY,
+  RetentionScheduler,
+} from './retention-scheduler.js';

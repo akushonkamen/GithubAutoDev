@@ -101,6 +101,12 @@
       "type": "file"
     },
     {
+      "path": "packages/artifacts/src/index.ts",
+      "accessCount": 9,
+      "lastAccessed": 1783102931905,
+      "type": "file"
+    },
+    {
       "path": "tests/security/src/__tests__/secret-leak-scan.test.ts",
       "accessCount": 7,
       "lastAccessed": 1783098061210,
@@ -122,12 +128,6 @@
       "path": "package.json",
       "accessCount": 6,
       "lastAccessed": 1783046073498,
-      "type": "file"
-    },
-    {
-      "path": "packages/artifacts/src/index.ts",
-      "accessCount": 6,
-      "lastAccessed": 1783102221176,
       "type": "file"
     },
     {
@@ -209,6 +209,12 @@
       "type": "file"
     },
     {
+      "path": "packages/artifacts/package.json",
+      "accessCount": 2,
+      "lastAccessed": 1783102903886,
+      "type": "file"
+    },
+    {
       "path": "CONTRIBUTING.md",
       "accessCount": 1,
       "lastAccessed": 1783039381925,
@@ -260,12 +266,6 @@
       "path": "packages/github/src/__tests__/signature.test.ts",
       "accessCount": 1,
       "lastAccessed": 1783044783967,
-      "type": "file"
-    },
-    {
-      "path": "packages/artifacts/package.json",
-      "accessCount": 1,
-      "lastAccessed": 1783044784148,
       "type": "file"
     },
     {
