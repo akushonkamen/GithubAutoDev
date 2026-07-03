@@ -82,3 +82,11 @@ export function verifyAuditChain(records: readonly AuditRecord[]): number | null
   }
   return null;
 }
+
+export {
+  type AuditChainAppendInput,
+  type AuditChainService,
+  type DbAuditRecord,
+  InMemoryAuditChainService,
+  computeRecordHash,
+} from './chain-service.js';
