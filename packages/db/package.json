@@ -8,9 +8,9 @@
   "scripts": {
     "build": "tsc -b",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
-    "generate": "echo 'TODO drizzle-kit generate' && exit 0",
-    "migrate": "echo 'TODO drizzle-kit migrate' && exit 0"
+    "test": "vitest run",
+    "generate": "echo 'drizzle-kit generate is currently disabled (NodeNext .js resolution incompatibility in drizzle-kit 0.30). Edit packages/db/migrations/0000_initial.sql by hand and mirror changes in src/schema/*.ts.' && exit 0",
+    "migrate": "psql \"$DATABASE_URL\" -f migrations/0000_initial.sql"
   },
   "dependencies": {
     "@cgao/schemas": "workspace:*",
