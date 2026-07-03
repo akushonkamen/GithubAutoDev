@@ -46,6 +46,34 @@ importers:
         specifier: ^4.19.0
         version: 4.22.5
 
+  apps/runner-broker:
+    dependencies:
+      '@hono/node-server':
+        specifier: ^1.13.0
+        version: 1.19.14(hono@4.12.27)
+      hono:
+        specifier: ^4.6.0
+        version: 4.12.27
+    devDependencies:
+      '@types/node':
+        specifier: ^22.7.0
+        version: 22.20.0
+      tsx:
+        specifier: ^4.19.0
+        version: 4.22.5
+
+  packages/artifacts:
+    dependencies:
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+
+  packages/audit:
+    dependencies:
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+
   packages/db:
     dependencies:
       '@cgao/schemas':
@@ -57,6 +85,21 @@ importers:
 
   packages/events:
     dependencies:
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+
+  packages/github:
+    dependencies:
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+
+  packages/policy:
+    dependencies:
+      '@cgao/schemas':
+        specifier: workspace:*
+        version: link:../schemas
       zod:
         specifier: ^3.23.0
         version: 3.25.76
@@ -417,6 +460,12 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@hono/node-server@1.19.14':
+    resolution: {integrity: sha512-GwtvgtXxnWsucXvbQXkRgqksiH2Qed37H9xHZocE5sA3N8O8O8/8FA3uclQXxXVzc9XBZuEOMK7+r02FmSpHtw==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: ^4
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
@@ -1060,6 +1109,10 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.1':
     optional: true
+
+  '@hono/node-server@1.19.14(hono@4.12.27)':
+    dependencies:
+      hono: 4.12.27
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
