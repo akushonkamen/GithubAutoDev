@@ -102,7 +102,9 @@ Artifact redaction baseline
 
 ## 4. M0：项目骨架与安全基线
 
-### [ ] T-M0-001 初始化 monorepo
+> **[audit 2026-07-03]** M0 实际仍在进行中。详见 `docs/audit/T-M0-audit-2026-07-03.md`。commit `b01cdf0` 过度声明完成度，仅 T-M0-005 达标。
+
+### [ ] T-M0-001 初始化 monorepo <!-- audit 2026-07-03: 不达标，缺 runner-broker/policy/github/artifacts/audit + infra/ + .github/workflows/ -->
 
 Spec：第 8、15、16 节  
 优先级：P0  
@@ -128,7 +130,7 @@ infra/docker-compose.yml
 CI 可运行 lint/typecheck/unit
 ```
 
-### [ ] T-M0-002 建立统一代码规范
+### [ ] T-M0-002 建立统一代码规范 <!-- audit 2026-07-03: 部分达标，缺 commitlint + logging 规范 -->
 
 Spec：第 4、23 节  
 优先级：P0  
@@ -151,7 +153,7 @@ CI 中 lint/typecheck/test 全部通过
 新增模块必须有基础单测
 ```
 
-### [ ] T-M0-003 定义 v2 威胁模型文档
+### [ ] T-M0-003 定义 v2 威胁模型文档 <!-- audit 2026-07-03: 部分达标，threat-model.md 完整但 attack-scenarios/*.md 全缺 -->
 
 Spec：第 6 节  
 优先级：P0  
@@ -174,7 +176,7 @@ attack-scenarios/webhook-replay.md
 每个攻击场景都有对应控制点和测试任务
 ```
 
-### [ ] T-M0-004 建立安全回归测试框架
+### [ ] T-M0-004 建立安全回归测试框架 <!-- audit 2026-07-03: 未达标，tests/security/ 与所有 fixtures 完全缺失 -->
 
 Spec：第 6、21、23 节  
 优先级：P0  
@@ -196,7 +198,7 @@ tests/fixtures/webhook-replay/
 测试失败会阻断 merge
 ```
 
-### [ ] T-M0-005 定义事件与错误码规范
+### [x] T-M0-005 定义事件与错误码规范 <!-- audit 2026-07-03: 达标，envelope/tests/standards 全在；@cgao/errors 包按 spec 推迟到 M1 -->
 
 Spec：第 10、20 节  
 优先级：P0  
