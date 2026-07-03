@@ -208,6 +208,9 @@ importers:
       '@cgao/github':
         specifier: workspace:*
         version: link:../../packages/github
+      '@cgao/orchestrator':
+        specifier: workspace:*
+        version: link:../../apps/orchestrator
       '@cgao/policy':
         specifier: workspace:*
         version: link:../../packages/policy

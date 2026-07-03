@@ -12,6 +12,7 @@
     "@cgao/artifacts": "workspace:*",
     "@cgao/audit": "workspace:*",
     "@cgao/github": "workspace:*",
+    "@cgao/orchestrator": "workspace:*",
     "@cgao/policy": "workspace:*",
     "@cgao/runner-broker": "workspace:*",
     "@cgao/schemas": "workspace:*",

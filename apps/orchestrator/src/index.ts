@@ -12,3 +12,4 @@ export * from './modules/prs/pr-body-renderer.js';
 export * from './modules/prs/traceability-block.js';
 export * from './modules/policy/dependency-change-detector.js';
 export * from './modules/policy/sca-hook.js';
+export * from './modules/merge/index.js';
