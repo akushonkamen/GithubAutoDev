@@ -96,26 +96,26 @@
   "hotPaths": [
     {
       "path": "docs/cgao_tasklist_v3.md",
-      "accessCount": 36,
-      "lastAccessed": 1783102168561,
+      "accessCount": 37,
+      "lastAccessed": 1783103288491,
       "type": "file"
     },
     {
       "path": "packages/artifacts/src/index.ts",
-      "accessCount": 9,
-      "lastAccessed": 1783102931905,
+      "accessCount": 10,
+      "lastAccessed": 1783103353592,
+      "type": "file"
+    },
+    {
+      "path": "packages/audit/src/index.ts",
+      "accessCount": 8,
+      "lastAccessed": 1783103034286,
       "type": "file"
     },
     {
       "path": "tests/security/src/__tests__/secret-leak-scan.test.ts",
       "accessCount": 7,
       "lastAccessed": 1783098061210,
-      "type": "file"
-    },
-    {
-      "path": "packages/audit/src/index.ts",
-      "accessCount": 7,
-      "lastAccessed": 1783102221289,
       "type": "file"
     },
     {
@@ -144,8 +144,8 @@
     },
     {
       "path": "apps/runner-broker/package.json",
-      "accessCount": 3,
-      "lastAccessed": 1783097326641,
+      "accessCount": 4,
+      "lastAccessed": 1783103559666,
       "type": "file"
     },
     {
@@ -215,6 +215,18 @@
       "type": "file"
     },
     {
+      "path": "packages/audit/package.json",
+      "accessCount": 2,
+      "lastAccessed": 1783103034127,
+      "type": "file"
+    },
+    {
+      "path": "apps/runner-broker/src/server.ts",
+      "accessCount": 2,
+      "lastAccessed": 1783103366993,
+      "type": "file"
+    },
+    {
       "path": "CONTRIBUTING.md",
       "accessCount": 1,
       "lastAccessed": 1783039381925,
@@ -281,12 +293,6 @@
       "type": "file"
     },
     {
-      "path": "packages/audit/package.json",
-      "accessCount": 1,
-      "lastAccessed": 1783044784972,
-      "type": "file"
-    },
-    {
       "path": "packages/audit/tsconfig.json",
       "accessCount": 1,
       "lastAccessed": 1783044785152,
@@ -296,12 +302,6 @@
       "path": "packages/audit/src/__tests__/chain.test.ts",
       "accessCount": 1,
       "lastAccessed": 1783044785515,
-      "type": "file"
-    },
-    {
-      "path": "apps/runner-broker/src/server.ts",
-      "accessCount": 1,
-      "lastAccessed": 1783044786081,
       "type": "file"
     },
     {
