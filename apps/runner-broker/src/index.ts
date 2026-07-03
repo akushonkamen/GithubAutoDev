@@ -154,3 +154,40 @@ export type {
   VerifierRunInput,
   VerifierRunResult,
 } from './gate/verifier-runner.js';
+
+// M11 — Agent SDK Runner (T-M11-001)
+export {
+  type AgentRunInput,
+  type AgentRunResult,
+  type SdkTransport,
+  type SdkTransportFactory,
+  registerSdkTransportFactory,
+  resetSdkTransportFactory,
+  runAgentSdkTask,
+  tryLoadSdkTransport,
+} from './sdk/agent-sdk-runner.js';
+export {
+  type RunnerAuditSink,
+  type RunnerHooks,
+  type ScrubFn,
+  enforceWrite,
+  persistScrubbedLog,
+} from './sdk/runner-hooks.js';
+export {
+  StreamingOutputCollector,
+  type CollectedEntry,
+  type CollectorFinalizeInput,
+  type SdkStreamEvent,
+} from './sdk/streaming-output-collector.js';
+
+// M11 — Parallel worktree execution (T-M11-002)
+export { WorktreeManager } from './worktree/worktree-manager.js';
+export type { AllocateInput, AllocateResult, Worktree } from './worktree/worktree-manager.js';
+export {
+  type ConflictKind,
+  type ConflictRecord,
+  type ConflictResolution,
+  detectConflicts,
+} from './worktree/conflict-resolver.js';
+export { TaskMergeController } from './worktree/task-merge-controller.js';
+export type { TaskMergeInput, TaskMergeOutput } from './worktree/task-merge-controller.js';

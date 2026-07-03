@@ -20,6 +20,14 @@
     "@cgao/schemas": "workspace:*",
     "zod": "^3.23.0"
   },
+  "peerDependencies": {
+    "@anthropic-ai/claude-agent-sdk": "*"
+  },
+  "peerDependenciesMeta": {
+    "@anthropic-ai/claude-agent-sdk": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@cgao/test-utils": "workspace:^",
     "@types/node": "^22.7.0",
