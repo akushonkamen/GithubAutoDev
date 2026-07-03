@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd tests/security && pnpm test 2>&1 | grep -E '\\\"path\\\"|\\\"line_text\\\"' | head -20\",\"description\":\"Show all secret leak hits\"}",
+  "error": "Exit code 1\n(eval):cd:1: no such file or directory: tests/security",
+  "timestamp": "2026-07-03T12:31:39.973Z",
+  "retry_count": 1
+}
