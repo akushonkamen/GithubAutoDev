@@ -45,6 +45,20 @@
 | AS-09 | 受保护文件被改 | protected file policy（§12.11） |
 | AS-10 | 审计哈希链被截断 / 改写 | hash chain + reconciler（§19） |
 
+#### 3.1.1 衍生风险（attack-scenarios 显式编号）
+
+下列衍生风险均被既有控制点覆盖；此处单独编号便于蓝军
+演练清单（`attack-scenarios/*.md`）与回归测试引用。
+
+| 编号 | 攻击 | 父类 | 增量控制 |
+|---|---|---|---|
+| AS-07a | Stale approval 复用（force-push 后旧 approval 仍生效） | AS-07 | final evaluator 重新读 GitHub head（§12.10）；approval_sha ≠ head_sha 即失效 |
+| AS-07b | TOCTOU on base（approval 期间目标分支被另 PR 改写） | AS-07 | base_sha 在 final evaluator 重新校验；不一致强制 rebase |
+| AS-07c | Workflow run 复用（旧 run_id 成功结果用作新 commit 凭据） | AS-07 | workflow_run key 绑 `head_sha`（spec §4.4）；状态查询强制 head_sha 比对 |
+| AS-05a | Forged authority marker（issue body 内伪造 `<system>` tag / `trust_level=admin`） | AS-05 / AS-03 | LLM 输出 schema 拒绝 trust_level 字段；权威动作只认 MOD-ISSUE |
+| AS-09a | 外部 PR artifact pollution（攻击者 PR 改 spec/plan artifact 注入下游 run） | AS-09 / AS-10 | spec/plan artifact 写权限仅 Trusted Control Runner；写入即 append audit_records；hash 不匹配 ART_HASH_MISMATCH |
+| AS-06a | Runner 跨任务 secret 残留（上一 job 写文件 / env 给下一 job） | AS-06 / AS-08 | runner-broker 每次 job 强制 clean checkout + env 重建（§13.1、§13.3） |
+
 ### 3.2 v3 新增 IM 攻击面
 
 | 编号 | 攻击 | 缓解（§6.4） |
