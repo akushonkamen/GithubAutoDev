@@ -166,7 +166,12 @@ describe('POST /github/webhook', () => {
         user: { login: 'cgao-bot[bot]' },
         html_url: 'https://github.com/cgao/test/issues/5#issuecomment-1',
       },
-      issue: { number: 5, title: 't', body: null, html_url: 'https://github.com/cgao/test/issues/5' },
+      issue: {
+        number: 5,
+        title: 't',
+        body: null,
+        html_url: 'https://github.com/cgao/test/issues/5',
+      },
       repository: { name: 'test', full_name: 'cgao/test', owner: { login: 'cgao' } },
     };
     const chash = createHash('sha256').update(JSON.stringify(webhookBody)).digest('hex');
@@ -181,12 +186,9 @@ describe('POST /github/webhook', () => {
 
     const business: string[] = [];
     const observed: string[] = [];
-    const unsubBiz = __internals.bus.subscribe(
-      'webhook.github.issue_comment.created',
-      (m) => {
-        business.push(m.id);
-      },
-    );
+    const unsubBiz = __internals.bus.subscribe('webhook.github.issue_comment.created', (m) => {
+      business.push(m.id);
+    });
     const unsubObs = __internals.bus.subscribe('webhook.github.observed', (m) => {
       observed.push(m.id);
     });

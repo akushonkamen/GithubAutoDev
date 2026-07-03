@@ -17,6 +17,7 @@
     "@cgao/artifacts": "workspace:*",
     "@cgao/audit": "workspace:*",
     "@cgao/policy": "workspace:*",
+    "@cgao/schemas": "workspace:*",
     "zod": "^3.23.0"
   },
   "devDependencies": {

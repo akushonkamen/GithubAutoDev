@@ -20,12 +20,14 @@ import {
 const sha64 = (s: string) => s.padEnd(64, '0').slice(0, 64);
 
 function planToDevData(h: Handoff) {
-  if (h.payload.kind !== 'plan_to_dev') throw new Error(`expected plan_to_dev, got ${h.payload.kind}`);
+  if (h.payload.kind !== 'plan_to_dev')
+    throw new Error(`expected plan_to_dev, got ${h.payload.kind}`);
   return h.payload.data;
 }
 
 function devToReviewData(h: Handoff) {
-  if (h.payload.kind !== 'dev_to_review') throw new Error(`expected dev_to_review, got ${h.payload.kind}`);
+  if (h.payload.kind !== 'dev_to_review')
+    throw new Error(`expected dev_to_review, got ${h.payload.kind}`);
   return h.payload.data;
 }
 

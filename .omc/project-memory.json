@@ -96,8 +96,8 @@
   "hotPaths": [
     {
       "path": "docs/cgao_tasklist_v3.md",
-      "accessCount": 7,
-      "lastAccessed": 1783040581623,
+      "accessCount": 10,
+      "lastAccessed": 1783097226976,
       "type": "file"
     },
     {
@@ -120,8 +120,8 @@
     },
     {
       "path": "packages/artifacts/src/index.ts",
-      "accessCount": 4,
-      "lastAccessed": 1783079417335,
+      "accessCount": 5,
+      "lastAccessed": 1783097250772,
       "type": "file"
     },
     {
@@ -132,8 +132,14 @@
     },
     {
       "path": "packages/audit/src/index.ts",
+      "accessCount": 4,
+      "lastAccessed": 1783097313730,
+      "type": "file"
+    },
+    {
+      "path": "apps/runner-broker/package.json",
       "accessCount": 3,
-      "lastAccessed": 1783080138024,
+      "lastAccessed": 1783097326641,
       "type": "file"
     },
     {
@@ -176,6 +182,18 @@
       "path": "tests/security/src/__tests__/webhook-replay.test.ts",
       "accessCount": 2,
       "lastAccessed": 1783048487048,
+      "type": "file"
+    },
+    {
+      "path": "apps/runner-broker/tsconfig.json",
+      "accessCount": 2,
+      "lastAccessed": 1783097250828,
+      "type": "file"
+    },
+    {
+      "path": "tests/security/src/__tests__/runner-no-secret.test.ts",
+      "accessCount": 2,
+      "lastAccessed": 1783097266685,
       "type": "file"
     },
     {
@@ -272,18 +290,6 @@
       "path": "packages/audit/src/__tests__/chain.test.ts",
       "accessCount": 1,
       "lastAccessed": 1783044785515,
-      "type": "file"
-    },
-    {
-      "path": "apps/runner-broker/package.json",
-      "accessCount": 1,
-      "lastAccessed": 1783044785697,
-      "type": "file"
-    },
-    {
-      "path": "apps/runner-broker/tsconfig.json",
-      "accessCount": 1,
-      "lastAccessed": 1783044785909,
       "type": "file"
     },
     {
@@ -386,12 +392,6 @@
       "path": "tests/security/src/__tests__/webhook-forgery.test.ts",
       "accessCount": 1,
       "lastAccessed": 1783045963091,
-      "type": "file"
-    },
-    {
-      "path": "tests/security/src/__tests__/runner-no-secret.test.ts",
-      "accessCount": 1,
-      "lastAccessed": 1783045963836,
       "type": "file"
     }
   ],

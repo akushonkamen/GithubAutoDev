@@ -92,3 +92,23 @@ export type {
   RunDevTaskInput,
   RunDevTaskOutput,
 } from './dev/development-module.js';
+
+// M6 — fast gate + test/fix loop (T-M6-001..005)
+export { FastGateRunner, DEFAULT_GATE_ADAPTERS } from './gate/fast-gate-runner.js';
+export type {
+  FastGateRunInput,
+  GateAdapterSpec,
+  GateCommandExecutor,
+} from './gate/fast-gate-runner.js';
+export { scrubGateLog } from './gate/log-scrubber.js';
+export type { ScrubbedLog } from './gate/log-scrubber.js';
+export type {
+  AdapterRunResult,
+  GateAdapter,
+  GateLogArtifact,
+  GateLogArtifactBody,
+  GateName,
+  GateResult,
+  PerAdapterResults,
+  Sha,
+} from './gate/types.js';
