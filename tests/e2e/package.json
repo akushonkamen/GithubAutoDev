@@ -1,0 +1,27 @@
+{
+  "name": "@cgao/e2e-tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@cgao/artifacts": "workspace:*",
+    "@cgao/audit": "workspace:*",
+    "@cgao/db": "workspace:*",
+    "@cgao/eventbus": "workspace:*",
+    "@cgao/github": "workspace:*",
+    "@cgao/orchestrator": "workspace:*",
+    "@cgao/policy": "workspace:*",
+    "@cgao/runner-broker": "workspace:*",
+    "@cgao/schemas": "workspace:*",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "tsx": "^4.19.0"
+  }
+}

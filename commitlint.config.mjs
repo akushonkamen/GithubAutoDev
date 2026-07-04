@@ -8,6 +8,7 @@
  *   T-M1-003 events: map issue.opened to CloudEvents
  *   T-M0-audit docs: reconcile T-M0-001..005 completion
  *   T-INTAKE-005 intake: dedup messages
+ *   T-E2E-004 e2e: add happy-path integration test
  *   chore(deps): bump hono
  *
  * Scope may appear as a space-separated word (`packages: ...`) or in
@@ -15,7 +16,7 @@
  */
 
 const CGAO_HEADER =
-  /^(T-(?:M\d+-(?:\d+|audit)|INTAKE-\d+)|chore|docs)(?:\s+|\()(?:[a-z0-9-_]+)\)?!?: .+$/;
+  /^(T-(?:M\d+-(?:\d+|audit)|INTAKE-\d+|E2E-\d+)|chore|docs)(?:\s+|\()(?:[a-z0-9-_]+)\)?!?: .+$/;
 
 /** @type {import('@commitlint/types').UserConfig} */
 export default {
@@ -25,7 +26,7 @@ export default {
         'cgao-task-id': ({ header }) => {
           return [
             CGAO_HEADER.test(header ?? ''),
-            'header must match `<T-Mx-xxx|T-INTAKE-xxx|chore|docs> <scope>: <summary>` (e.g. `T-M0-001 packages: add skeleton`)',
+            'header must match `<T-Mx-xxx|T-INTAKE-xxx|T-E2E-xxx|chore|docs> <scope>: <summary>` (e.g. `T-M0-001 packages: add skeleton`)',
           ];
         },
       },

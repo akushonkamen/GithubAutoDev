@@ -240,6 +240,46 @@ importers:
         specifier: ^22.7.0
         version: 22.20.0
 
+  tests/e2e:
+    dependencies:
+      '@cgao/artifacts':
+        specifier: workspace:*
+        version: link:../../packages/artifacts
+      '@cgao/audit':
+        specifier: workspace:*
+        version: link:../../packages/audit
+      '@cgao/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@cgao/eventbus':
+        specifier: workspace:*
+        version: link:../../packages/eventbus
+      '@cgao/github':
+        specifier: workspace:*
+        version: link:../../packages/github
+      '@cgao/orchestrator':
+        specifier: workspace:*
+        version: link:../../apps/orchestrator
+      '@cgao/policy':
+        specifier: workspace:*
+        version: link:../../packages/policy
+      '@cgao/runner-broker':
+        specifier: workspace:*
+        version: link:../../apps/runner-broker
+      '@cgao/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: ^22.7.0
+        version: 22.20.0
+      tsx:
+        specifier: ^4.19.0
+        version: 4.22.5
+
   tests/security:
     dependencies:
       '@cgao/artifacts':
