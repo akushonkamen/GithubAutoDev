@@ -47,6 +47,11 @@ export class InMemoryDedupStore implements DedupStore {
     return this.records.size;
   }
 
+  /** Test hook — wipe all records so `__internals.__reset()` works. */
+  clearForTests(): void {
+    this.records.clear();
+  }
+
   private gc(): void {
     const cutoff = Date.now() - this.windowMs;
     for (const [k, v] of this.records) {

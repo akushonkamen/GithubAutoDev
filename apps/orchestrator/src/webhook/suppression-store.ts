@@ -73,4 +73,9 @@ export class InMemorySuppressionStore implements SuppressionStore {
       this.records.shift();
     }
   }
+
+  /** Test hook — wipe all records so `__internals.__reset()` works. */
+  clearForTests(): void {
+    this.records.length = 0;
+  }
 }
