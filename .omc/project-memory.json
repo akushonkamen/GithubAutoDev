@@ -96,14 +96,20 @@
   "hotPaths": [
     {
       "path": "docs/cgao_tasklist_v3.md",
-      "accessCount": 37,
-      "lastAccessed": 1783103288491,
+      "accessCount": 41,
+      "lastAccessed": 1783103992062,
       "type": "file"
     },
     {
       "path": "packages/artifacts/src/index.ts",
       "accessCount": 10,
       "lastAccessed": 1783103353592,
+      "type": "file"
+    },
+    {
+      "path": "commitlint.config.mjs",
+      "accessCount": 9,
+      "lastAccessed": 1783123791980,
       "type": "file"
     },
     {
@@ -119,15 +125,9 @@
       "type": "file"
     },
     {
-      "path": "commitlint.config.mjs",
-      "accessCount": 6,
-      "lastAccessed": 1783045337868,
-      "type": "file"
-    },
-    {
       "path": "package.json",
-      "accessCount": 6,
-      "lastAccessed": 1783046073498,
+      "accessCount": 7,
+      "lastAccessed": 1783124802940,
       "type": "file"
     },
     {
@@ -150,14 +150,14 @@
     },
     {
       "path": "packages/github/src/index.ts",
-      "accessCount": 3,
-      "lastAccessed": 1783102256290,
+      "accessCount": 4,
+      "lastAccessed": 1783124784803,
       "type": "file"
     },
     {
       "path": "biome.json",
-      "accessCount": 2,
-      "lastAccessed": 1783040482526,
+      "accessCount": 3,
+      "lastAccessed": 1783123586770,
       "type": "file"
     },
     {
@@ -227,6 +227,24 @@
       "type": "file"
     },
     {
+      "path": "packages/github/package.json",
+      "accessCount": 2,
+      "lastAccessed": 1783124802848,
+      "type": "file"
+    },
+    {
+      "path": "infra/docker-compose.yml",
+      "accessCount": 2,
+      "lastAccessed": 1783124809009,
+      "type": "file"
+    },
+    {
+      "path": ".env.example",
+      "accessCount": 2,
+      "lastAccessed": 1783124858521,
+      "type": "file"
+    },
+    {
       "path": "CONTRIBUTING.md",
       "accessCount": 1,
       "lastAccessed": 1783039381925,
@@ -260,12 +278,6 @@
       "path": "packages/policy/src/__tests__/policy.test.ts",
       "accessCount": 1,
       "lastAccessed": 1783044699681,
-      "type": "file"
-    },
-    {
-      "path": "packages/github/package.json",
-      "accessCount": 1,
-      "lastAccessed": 1783044783432,
       "type": "file"
     },
     {
@@ -305,21 +317,9 @@
       "type": "file"
     },
     {
-      "path": "infra/docker-compose.yml",
-      "accessCount": 1,
-      "lastAccessed": 1783044923413,
-      "type": "file"
-    },
-    {
       "path": "infra/README.md",
       "accessCount": 1,
       "lastAccessed": 1783044923645,
-      "type": "file"
-    },
-    {
-      "path": ".env.example",
-      "accessCount": 1,
-      "lastAccessed": 1783044924032,
       "type": "file"
     },
     {

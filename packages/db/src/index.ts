@@ -9,3 +9,4 @@
 
 export * from './schema/index.js';
 export * from './repos/index.js';
+export { createDb, type CreateDbOptions, type DbHandle, type DrizzleDb } from './client.js';
