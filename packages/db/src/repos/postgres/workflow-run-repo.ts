@@ -10,8 +10,8 @@
 
 import { and, eq } from 'drizzle-orm';
 import { sql } from 'drizzle-orm';
-import { workflowRuns, type WorkflowRun } from '../../schema/workflow-runs.js';
 import type { DrizzleDb } from '../../client.js';
+import { type WorkflowRun, workflowRuns } from '../../schema/workflow-runs.js';
 import {
   ConcurrentUpdateError,
   type NewWorkflowRunInput,
@@ -148,9 +148,7 @@ export class PostgresRunLock implements RunLock {
       this.txDepth++;
       return;
     }
-    await this.db.execute(
-      sql`SELECT pg_advisory_lock(${this.key}::integer)`,
-    );
+    await this.db.execute(sql`SELECT pg_advisory_lock(${this.key}::integer)`);
     this.holder = holder;
     this.txDepth = 1;
   }
@@ -159,9 +157,7 @@ export class PostgresRunLock implements RunLock {
     if (this.holder !== holder) return;
     this.txDepth--;
     if (this.txDepth > 0) return;
-    await this.db.execute(
-      sql`SELECT pg_advisory_unlock(${this.key}::integer)`,
-    );
+    await this.db.execute(sql`SELECT pg_advisory_unlock(${this.key}::integer)`);
     this.holder = null;
   }
 

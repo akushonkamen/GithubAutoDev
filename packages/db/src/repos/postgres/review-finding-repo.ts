@@ -8,11 +8,11 @@
  */
 
 import { and, eq } from 'drizzle-orm';
-import { reviewFindings, type ReviewFinding } from '../../schema/review-findings.js';
 import type { DrizzleDb } from '../../client.js';
+import { type ReviewFinding, reviewFindings } from '../../schema/review-findings.js';
 import {
-  ReviewFindingNotFoundError,
   type NewReviewFindingInput,
+  ReviewFindingNotFoundError,
   type ReviewFindingPatch,
   type ReviewFindingRepository,
   type ReviewFindingRow,
@@ -63,17 +63,11 @@ export class PostgresReviewFindingRepository implements ReviewFindingRepository 
   }
 
   async findByRun(runId: string): Promise<readonly ReviewFindingRow[]> {
-    return await this.db
-      .select()
-      .from(reviewFindings)
-      .where(eq(reviewFindings.runId, runId));
+    return await this.db.select().from(reviewFindings).where(eq(reviewFindings.runId, runId));
   }
 
   async findByPr(prNumber: number): Promise<readonly ReviewFindingRow[]> {
-    return await this.db
-      .select()
-      .from(reviewFindings)
-      .where(eq(reviewFindings.prNumber, prNumber));
+    return await this.db.select().from(reviewFindings).where(eq(reviewFindings.prNumber, prNumber));
   }
 
   async findBlockingByPr(prNumber: number): Promise<readonly ReviewFindingRow[]> {

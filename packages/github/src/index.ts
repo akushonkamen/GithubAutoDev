@@ -55,3 +55,11 @@ export const issueOpenedPayloadSchema = z.object({
 });
 
 export type IssueOpenedPayload = z.infer<typeof issueOpenedPayloadSchema>;
+
+// Octokit client + adapters (Plan B Phase 1).
+export {
+  createGithubAppClient,
+  type AuthenticatedOctokit,
+  type GithubAppCredentials,
+} from './octokit-client.js';
+export * from './adapters/index.js';
