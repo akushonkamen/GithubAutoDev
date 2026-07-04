@@ -165,9 +165,7 @@ PORT=8787
 GITHUB_WEBHOOK_SECRET=<the 64-hex-char string from step 2>
 
 GITHUB_APP_ID=<App ID from step 4>
-GITHUB_APP_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
-... full .pem contents from step 4 ...
------END RSA PRIVATE KEY-----"
+GITHUB_APP_PRIVATE_KEY="<paste the full .pem contents from step 4 here — multi-line, including the BEGIN/END header and footer lines>"
 GITHUB_INSTALLATION_ID=<installation id from step 5>
 
 CGAO_BOT_LOGIN=<your-app-slug>[bot]

@@ -23,6 +23,7 @@
     "@cgao/policy": "workspace:*",
     "@cgao/runner-broker": "workspace:*",
     "@cgao/schemas": "workspace:*",
+    "@hono/node-server": "^1.13.0",
     "hono": "^4.6.0",
     "yaml": "^2.9.0",
     "zod": "^3.23.0"

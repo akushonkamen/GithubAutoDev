@@ -23,6 +23,10 @@
  * Optional:
  *   - `CGAO_REPO_ROOT`          — absolute path for the subprocess git adapter
  *   - `S3_ENDPOINT` / `S3_BUCKET` — MinIO/S3 for ArtifactStore
+ *   - `CGAO_SMOKE_BOOT=1`       — boot-smoke mode: skip Octokit construction
+ *                                 so tests/e2e boot-smoke can run without
+ *                                 GitHub App creds. Webhook HMAC verification
+ *                                 does not need Octokit.
  */
 
 import type { ArtifactStore } from '@cgao/artifacts';
@@ -83,7 +87,12 @@ export async function buildRuntime(): Promise<OrchestratorRuntime> {
   const db = await openDb();
   const dedup = makeDedup('real');
   const suppression = makeSuppression('real');
-  const github = await buildGithubAdapter();
+  // Boot-smoke mode: exercised by tests/e2e boot-smoke.test.ts. The test
+  // verifies the webhook HMAC + Postgres wiring but does not need a real
+  // GitHub App, so we skip Octokit construction (which would otherwise
+  // fail on missing creds). Production boots leave CGAO_SMOKE_BOOT unset.
+  const smokeBoot = process.env.CGAO_SMOKE_BOOT === '1';
+  const github = smokeBoot ? null : await buildGithubAdapter();
   return {
     mode,
     bus,

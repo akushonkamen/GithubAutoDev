@@ -20,6 +20,7 @@ import type { ArtifactStore } from '@cgao/artifacts';
 import type { EventBus } from '@cgao/eventbus';
 import { InMemoryEventBus } from '@cgao/eventbus';
 import { PrometheusRegistry } from '@cgao/observability';
+import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { InMemoryDedupStore } from './webhook/dedup-store.js';
 import { type WebhookDeps, handleGithubWebhook } from './webhook/github-route.js';
@@ -149,16 +150,14 @@ const port = Number(process.env.PORT ?? 8787);
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   // Boot runtime before serving. Memory mode is synchronous-flavoured but
-  // the function still returns a Promise; real mode needs the await.
+  // the function still returns a Promise; real mode needs the await. The
+  // `@hono/node-server` adapter binds Hono's fetch handler to a Node.js
+  // http.Server — same pattern apps/runner-broker uses.
   bootRuntime()
     .then(() => {
-      console.log(`[cgao-orchestrator] listening on :${port}`);
-      // biome-ignore lint/suspicious/noExplicitAny: Hono serve types vary across versions
-      const serve = (app as any).serve ?? (app as any).fetch;
-      if (typeof serve === 'function') {
-        // biome-ignore lint/suspicious/noExplicitAny: Bun/Deno/Hono variants
-        (serve as any).call(app, { port });
-      }
+      serve({ fetch: app.fetch, port }, (info) => {
+        console.log(`[cgao-orchestrator] listening on :${info.port}`);
+      });
     })
     .catch((err) => {
       console.error('[cgao-orchestrator] boot failed:', err);
